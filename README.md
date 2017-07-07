@@ -3,4 +3,5 @@ Event Management made easy. Manage your Registrations for Events with limited Nu
 
 
 ![Build Status](https://travis-ci.org/freakinChuck/EventMaster.svg?branch=master)
+
 Continous Integration by Travis CI 
