@@ -46,16 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SplashScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreenForm.Designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +72,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -78,6 +87,115 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EventMaster.Source.Data\EventMaster.Source.Data.csproj">
+      <Project>{0f5dd9a9-0514-42f9-a67e-27e63cdcd7b1}</Project>
+      <Name>EventMaster.Source.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814072 - attention favori.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814073 - discount price t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814074 - draw edit pencil.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814075 - find magnifier m.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814076 - approve like thu.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814077 - download loop re.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814078 - close no reject.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814079 - approve check ok.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814080 - history left pre.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814081 - lock open unlock.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814082 - arrow bottom dow.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814083 - arrow left.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814084 - arrow back left .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814085 - arrow forward ne.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814086 - arrow forward ne.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814087 - arrow top up.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814088 - attention exclam.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814089 - account avatar p.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814090 - delete garbage t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814091 - alarm bell sound.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814092 - box files storag.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814093 - calendar events .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814094 - camera images ph.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814095 - cart checkout co.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814096 - attach attachmen.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814097 - clock schedule t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814098 - close no reject.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814099 - chat cloud speec.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814100 - credit card paym.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814101 - award champion c.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814102 - eye sight view.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814103 - click finger tou.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814104 - favorite heart l.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814105 - hyperlink link.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814106 - location map mar.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814107 - lock padlock sec.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814108 - email envenlope .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814109 - hamburger menu.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814110 - close less minus.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814111 - image photograph.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814112 - audio play playe.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814113 - add more plus.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814114 - help question.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814115 - forward right ro.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814116 - loop repeat rota.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814117 - gear options pre.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814118 - graph network sh.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814119 - launch open shar.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814120 - analytics bar ch.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\16\1814121 - upload.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814072 - attention favori.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814073 - discount price t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814074 - draw edit pencil.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814075 - find magnifier m.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814076 - approve like thu.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814077 - download loop re.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814078 - close no reject.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814079 - approve check ok.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814080 - history left pre.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814081 - lock open unlock.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814082 - arrow bottom dow.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814083 - arrow left.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814084 - arrow back left .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814085 - arrow forward ne.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814086 - arrow forward ne.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814087 - arrow top up.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814088 - attention exclam.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814089 - account avatar p.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814090 - delete garbage t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814091 - alarm bell sound.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814092 - box files storag.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814093 - calendar events .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814094 - camera images ph.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814095 - cart checkout co.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814096 - attach attachmen.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814097 - clock schedule t.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814098 - close no reject.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814099 - chat cloud speec.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814100 - credit card paym.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814101 - award champion c.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814102 - eye sight view.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814103 - click finger tou.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814104 - favorite heart l.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814105 - hyperlink link.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814106 - location map mar.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814107 - lock padlock sec.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814108 - email envenlope .png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814109 - hamburger menu.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814110 - close less minus.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814111 - image photograph.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814112 - audio play playe.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814113 - add more plus.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814114 - help question.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814115 - forward right ro.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814116 - loop repeat rota.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814117 - gear options pre.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814118 - graph network sh.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814119 - launch open shar.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814120 - analytics bar ch.png" />
+    <Content Include="Icons\Evil Icons User Interface\PNG\32\1814121 - upload.png" />
+    <Content Include="Icons\Evil Icons User Interface\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
