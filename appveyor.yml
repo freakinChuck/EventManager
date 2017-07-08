@@ -21,6 +21,5 @@ build:
   project: EventMaster.Source/EventMaster.Source.sln      # path to Visual Studio solution or project
 
 artifacts:
-
-  # pushing a single file
-  - path: EventMaster.zip
+  # pushing a single file with environment variable in path and "Deployment name" specified
+  - path: logs
