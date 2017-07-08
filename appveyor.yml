@@ -19,3 +19,8 @@ configuration: Release
 
 build:
   project: EventMaster.Source/EventMaster.Source.sln      # path to Visual Studio solution or project
+
+artifacts:
+
+  # pushing a single file
+  - path: EventMaster.zip
