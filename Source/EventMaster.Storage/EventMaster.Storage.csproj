@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\StorageContainer.cs" />
     <Compile Include="Workspace.cs" />

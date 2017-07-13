@@ -13,29 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EventMaster.Employee
+namespace EventMaster.Participant
 {
     /// <summary>
-    /// Interaction logic for ManageEmployeeView.xaml
+    /// Interaction logic for ManageParticipantView.xaml
     /// </summary>
-    public partial class ManageEmployeeView : Page
+    public partial class ManageParticipantView : Page
     {
-        public ManageEmployeeView()
+        public ManageParticipantView()
         {
             InitializeComponent();
-            this.DataContext = new ManageEmployeeViewModel();
+            this.DataContext = new ManageParticipantViewModel();
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
-                var newSelectedItem = e.AddedItems[0] as EmployeeViewModel;
-                ((ManageEmployeeViewModel)this.DataContext).SelectedEmployee = newSelectedItem;
+                var newSelectedItem = e.AddedItems[0] as ParticipantViewModel;
+                ((ManageParticipantViewModel)this.DataContext).SelectedParticipant = newSelectedItem;
             }
             else
             {
-                ((ManageEmployeeViewModel)this.DataContext).SelectedEmployee = null;
+                ((ManageParticipantViewModel)this.DataContext).SelectedParticipant = null;
             }
         }
     }

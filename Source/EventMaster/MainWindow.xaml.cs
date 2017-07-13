@@ -27,6 +27,9 @@ namespace EventMaster
         {
             InitializeComponent();
 
+            Workspace.HasChangesChanged += Workspace_HasChangesChanged;
+            Workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
+
             var commandLineArgs = Environment.GetCommandLineArgs();
 
             if (commandLineArgs.Length > 1)
@@ -40,6 +43,24 @@ namespace EventMaster
             }
 
             (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
+        }
+
+        private void Workspace_WorkspaceChanged(object sender, EventArgs e)
+        {
+            ContentFrame.Content = null;
+            SetTitle();
+        }
+
+        private void SetTitle()
+        {
+            StringBuilder titleBuilder = new StringBuilder();
+            titleBuilder.AppendFormat("{1}EventMaster ({0})", string.IsNullOrEmpty(Workspace.WorkspacePath) ? "*Unbenannt" + Workspace.FILEENDING : Workspace.WorkspacePath, Workspace.HasCurrentWorkspaceChanges ? "*" : string.Empty);
+            this.Title = titleBuilder.ToString();
+        }
+
+        private void Workspace_HasChangesChanged(object sender, EventArgs e)
+        {
+            SetTitle();
         }
 
         private void OpenEmployeeRibbonButton_Click(object sender, RoutedEventArgs e)
@@ -69,6 +90,21 @@ namespace EventMaster
             (DataContext as MainViewModel)?.PreDataSaveInvoke();
             Workspace.SaveCurrentWorkspace();
             (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (Workspace.IsWorkspaceActive)
+            {
+                var result = Workspace.AskToSaveCurrentWorkspaceAndSaveIt();
+                e.Cancel = result.Cancel;
+            }
+        }
+
+        private void OpenParticipantsRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new Participant.ManageParticipantView();
+
         }
     }
 }

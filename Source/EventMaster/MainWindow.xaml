@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EventMaster"
         mc:Ignorable="d"
-        Title="MainWindow" Height="522.5" Width="910.5">
+        Title="EventMaster" Height="609.5" Width="1036.5"
+        Closing="Window_Closing" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
@@ -24,6 +25,8 @@
             </Ribbon.ApplicationMenu>
             <RibbonTab Header="Verwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Stammdaten">
+                    <RibbonButton x:Name="OpenParticipantsRibbonButton" Label="Teilnehmer" LargeImageSource="{StaticResource ParticipantsImage}" Click="OpenParticipantsRibbonButton_Click" />
+
                     <RibbonButton Name="OpenEmployeeRibbonButton" Label="Mitarbeiter" LargeImageSource="{StaticResource EmployeesImage}" Click="OpenEmployeeRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>

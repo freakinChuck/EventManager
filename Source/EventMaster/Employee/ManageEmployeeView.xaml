@@ -14,17 +14,23 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ListView ItemsSource="{Binding AllEmployees}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.ColumnSpan="2" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding AllEmployees}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single" Grid.Row="0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Grid.Row="1" Padding="5,5,5,5">Neuer Mitarbeiter</Button>
+            <Button Grid.Column="0" Grid.Row="1" Padding="5,5,5,5" Command="{Binding NewEmployeeCommand}">Neu</Button>
+            <Button Grid.Column="1" Grid.Row="1" Padding="5,5,5,5" Command="{Binding RemoveEmployeeCommand}" IsEnabled="{Binding IsEmployeeSelected}" >Entfernen</Button>
+
         </Grid>
-        
-        <Grid>
+
+        <Grid IsEnabled="{Binding IsEmployeeSelected}">
             <Grid.Resources>
                 <Style TargetType="{x:Type TextBox}">
                     <Setter Property="Margin" Value="1" />
@@ -33,17 +39,19 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Name</Label>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedEmployee.Name, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedEmployee.Name, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="1">Vorname</Label>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedEmployee.Firstname, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedEmployee.Firstname, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
         </Grid>
     </DockPanel>
 </Page>

@@ -7,4 +7,5 @@
     <BitmapImage x:Key="OpenFileImage" UriSource="Icons/299060 - folder.png" />
     <BitmapImage x:Key="InfoImage" UriSource="Icons/299086 - info sign.png" />
     <BitmapImage x:Key="SettingsImage" UriSource="Icons/299100 - screwdriver wrench.png" />
+    <BitmapImage x:Key="ParticipantsImage" UriSource="Icons/285648 - group user.png" />
 </ResourceDictionary>

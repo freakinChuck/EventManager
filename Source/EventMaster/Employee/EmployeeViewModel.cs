@@ -1,5 +1,7 @@
 ﻿using EventMaster.Storage.Model;
 using System.ComponentModel;
+using System;
+using EventMaster.Storage;
 
 namespace EventMaster.Employee
 {
@@ -7,23 +9,25 @@ namespace EventMaster.Employee
     {
         public EmployeeViewModel(EmployeeModel storageEmployee)
         {
-            id = storageEmployee.Id;
-            name = storageEmployee.Name;
-            firstname = storageEmployee.Firstname;
+            this.storageEmployee = storageEmployee;
+            this.PropertyChanged += EmployeeViewModel_PropertyChanged;
         }
 
-        private string id;
-        private string name;
-        private string firstname;
+        private void EmployeeViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Workspace.RegisterDataChanged();
+        }
 
-        public string Id => id;
+        private EmployeeModel storageEmployee;
+
+        public string Id => storageEmployee.Id;
 
         public string Name
         {
-            get { return name; }
+            get { return storageEmployee.Name; }
             set
             {
-                name = value;
+                storageEmployee.Name = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
             }
@@ -31,10 +35,10 @@ namespace EventMaster.Employee
 
         public string Firstname
         {
-            get { return firstname; }
+            get { return storageEmployee.Firstname; }
             set
             {
-                firstname = value;
+                storageEmployee.Firstname = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("First"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
             }
@@ -43,5 +47,11 @@ namespace EventMaster.Employee
         public string DisplayName => $"{Name} {Firstname}";
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        internal void RemoveEmployeeFromModel()
+        {
+            Workspace.CurrentData.Employees.Remove(storageEmployee);
+            Workspace.RegisterDataChanged();
+        }
     }
 }

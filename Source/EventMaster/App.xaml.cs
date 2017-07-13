@@ -24,7 +24,7 @@ namespace EventMaster
 
         private void Workspace_AskSaveWorkspace(object sender, WorkspaceCancelEventArgs e)
         {
-            var result = MessageBox.Show("Sie haben ungespeicherte Änderungen, möchten Sie diese Speichern?", "ungespeicherte Änderungen", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            var result = MessageBox.Show("Sie haben ungespeicherte Änderungen, möchten Sie diese Speichern?", "ungespeicherte Änderungen", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             e.Cancel = result == MessageBoxResult.Cancel;
             e.DoSave = result == MessageBoxResult.Yes;
         }

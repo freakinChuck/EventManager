@@ -19,6 +19,7 @@ namespace EventMaster.Storage
         private StorageContainer storageContainer;
 
         public static event EventHandler HasChangesChanged;
+        public static event EventHandler WorkspaceChanged;
         public static event EventHandler<WorkspaceCancelEventArgs> AskSaveWorkspace;
         public static event EventHandler<WorkspacePathEventArgs> AskSavePathWorkspace;
         private static Workspace currentWorkspace;
@@ -34,38 +35,46 @@ namespace EventMaster.Storage
         }
         public static void LoadWorkspace(string filePath)
         {
-            Stream stream = new FileStream(filePath, FileMode.Open);
-            XmlSerializer serializer = new XmlSerializer(typeof(StorageContainer));
-            var container = (StorageContainer)serializer.Deserialize(stream);
-            Workspace workspace = new Workspace();
-            workspace.storageContainer = container;
-            workspace.currentFilePath = filePath;
-            currentWorkspace = workspace;
-            SetHasChanges(false);
+            using (Stream stream = new FileStream(filePath, FileMode.Open))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(StorageContainer));
+                var container = (StorageContainer)serializer.Deserialize(stream);
+                Workspace workspace = new Workspace();
+                workspace.storageContainer = container;
+                workspace.currentFilePath = filePath;
+                currentWorkspace = workspace;
+                WorkspaceChanged?.Invoke(currentWorkspace, new EventArgs());
+                SetHasChanges(false);
+            }
         }
         public static void CreateNewWorkspace()
         {
             if (currentWorkspace != null)
             {
-                if (currentWorkspace.HasChanges)
-                {
-                    WorkspaceCancelEventArgs args = new WorkspaceCancelEventArgs(currentWorkspace);
-                    AskSaveWorkspace?.Invoke(currentWorkspace, args);
-                    if (args.Cancel)
-                    {
-                        return;
-                    }
-                    if (args.DoSave)
-                    {
-                        currentWorkspace.SaveWorkspace();
-                    }
-                }
+                AskToSaveCurrentWorkspaceAndSaveIt();
                 currentWorkspace = null;
             }
 
             var newWorkspace = new Workspace();
             currentWorkspace = newWorkspace;
-            SetHasChanges(false);
+            WorkspaceChanged?.Invoke(currentWorkspace, new EventArgs());
+            SetHasChanges(true);
+        }
+
+        public static WorkspaceCancelEventArgs AskToSaveCurrentWorkspaceAndSaveIt()
+        {
+            WorkspaceCancelEventArgs args = new WorkspaceCancelEventArgs(currentWorkspace);
+
+            if (currentWorkspace.HasChanges)
+            {
+                AskSaveWorkspace?.Invoke(currentWorkspace, args);
+                if (!args.Cancel && args.DoSave)
+                {
+                    currentWorkspace.SaveWorkspace();
+                }
+            }
+            return args;
+
         }
 
         public static void SaveCurrentWorkspace()
@@ -86,15 +95,18 @@ namespace EventMaster.Storage
                 this.currentFilePath = args.Path;
             }
 
-            Stream stream = new FileStream(this.currentFilePath, FileMode.OpenOrCreate);
-            XmlSerializer serializer = new XmlSerializer(typeof(StorageContainer));
-            serializer.Serialize(stream, this.storageContainer);
-            SetHasChanges(false);
+            using (Stream stream = new FileStream(this.currentFilePath, FileMode.Create))
+            {
+                //stream.
+                XmlSerializer serializer = new XmlSerializer(typeof(StorageContainer));
+                serializer.Serialize(stream, this.storageContainer);
+                SetHasChanges(false);
+            }
         }
 
         private static void SetHasChanges(bool hasChanges)
         {
-            hasChanges = false;
+            currentWorkspace.hasChanges = hasChanges;
             HasChangesChanged?.Invoke(currentWorkspace, new EventArgs());
         }
 
@@ -104,6 +116,17 @@ namespace EventMaster.Storage
         public bool HasChanges
         {
             get { return hasChanges; }
+        }
+        public static bool HasCurrentWorkspaceChanges
+        {
+            get { return currentWorkspace != null ? currentWorkspace.hasChanges : false; }
+        }
+
+        public static string WorkspacePath => currentWorkspace != null ? currentWorkspace.currentFilePath : string.Empty;
+
+        public static void RegisterDataChanged()
+        {
+            SetHasChanges(true);
         }
     }
 }

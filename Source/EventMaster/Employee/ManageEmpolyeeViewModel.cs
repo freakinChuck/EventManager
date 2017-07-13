@@ -1,4 +1,6 @@
-﻿using EventMaster.Storage;
+﻿using EventMaster._Helper;
+using EventMaster.Storage;
+using EventMaster.Storage.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,15 +12,21 @@ namespace EventMaster.Employee
 {
     public class ManageEmployeeViewModel : INotifyPropertyChanged
     {
+        private int selectedIndex;
+
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set {
+                selectedIndex = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIndex)));
+            }
+        }
+
         public ManageEmployeeViewModel()
         {
             AllEmployees = new BindingList<EmployeeViewModel>(Workspace.CurrentData.Employees.Select(x => new EmployeeViewModel(x)).ToList());
-            MainViewModel.Instance.PreDataSave += Instance_PreDataSave; 
-        }
-
-        private void Instance_PreDataSave(object sender, EventArgs e)
-        {
-            DoSaveDataToModel();
+            SelectedEmployee = null;
         }
 
         public BindingList<EmployeeViewModel> AllEmployees { get; set; }
@@ -30,15 +38,36 @@ namespace EventMaster.Employee
             set
             {
                 selectedEmployee = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedEmployee"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedEmployee)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEmployeeSelected)));
             }
         }
 
-        private void DoSaveDataToModel()
-        {
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        public BindingCommand NewEmployeeCommand
+        {
+            get { return new BindingCommand(x => AddNewEmployee()); }
+        }
+        private void AddNewEmployee()
+        {
+            this.AllEmployees.Add(new EmployeeViewModel(EmployeeModel.CreateNewEmployee()));
+            Workspace.RegisterDataChanged();
+            SelectedIndex = this.AllEmployees.Count - 1;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public BindingCommand RemoveEmployeeCommand
+        {
+            get { return new BindingCommand(x => RemoveEmployee()); }
+        }
+        private void RemoveEmployee()
+        {
+            var selectedEmployee = SelectedEmployee;
+            this.AllEmployees.Remove(selectedEmployee);
+            //SelectedIndex = 0;
+            selectedEmployee.RemoveEmployeeFromModel();
+        }
+
+        public bool IsEmployeeSelected => SelectedEmployee != null;
     }
 }

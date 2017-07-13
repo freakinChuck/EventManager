@@ -55,9 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Participant\ManageParticipantView.xaml.cs">
+      <DependentUpon>ManageParticipantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Participant\ManageParticipantViewModel.cs" />
+    <Compile Include="Participant\ParticipantViewModel.cs" />
+    <Compile Include="_Helper\BindingCommand.cs" />
     <Page Include="Employee\ManageEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Participant\ManageParticipantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Ressources\Icons.xaml">
       <SubType>Designer</SubType>
@@ -124,6 +134,9 @@
     <Resource Include="Ressources\Icons\299060 - folder.png" />
     <Resource Include="Ressources\Icons\299086 - info sign.png" />
     <Resource Include="Ressources\Icons\299100 - screwdriver wrench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icons\285648 - group user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

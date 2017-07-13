@@ -10,7 +10,9 @@ namespace EventMaster.Storage.Storage
         public StorageContainer()
         {
             Employees = new List<EmployeeModel>();
+            Participants = new List<ParticipantModel>();
         }
         public List<EmployeeModel> Employees { get; set; }
+        public List<ParticipantModel> Participants { get; set; }
     }
 }
