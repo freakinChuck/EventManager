@@ -71,7 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Employee\EmployeeModel.cs" />
+    <Compile Include="Employee\EmployeeViewModel.cs" />
     <Compile Include="Employee\ManageEmployeeView.xaml.cs">
       <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
     </Compile>
@@ -109,8 +109,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Ressources\image.png" />
+    <Resource Include="Ressources\Icons\285641 - id user.png" />
+    <Resource Include="Ressources\Icons\README.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EventMaster.Storage\EventMaster.Storage.csproj">
+      <Project>{2db1d83f-7f06-42d2-94f6-1e55d81020fc}</Project>
+      <Name>EventMaster.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icons\285657 - floppy save.png" />
+    <Resource Include="Ressources\Icons\285688 - empty file.png" />
+    <Resource Include="Ressources\Icons\299060 - folder.png" />
+    <Resource Include="Ressources\Icons\299086 - info sign.png" />
+    <Resource Include="Ressources\Icons\299100 - screwdriver wrench.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

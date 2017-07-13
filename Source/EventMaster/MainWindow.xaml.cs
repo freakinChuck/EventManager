@@ -1,5 +1,7 @@
-﻿using System;
+﻿using EventMaster.Storage;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,20 @@ namespace EventMaster
         public MainWindow()
         {
             InitializeComponent();
+
+            var commandLineArgs = Environment.GetCommandLineArgs();
+
+            if (commandLineArgs.Length > 1)
+            {
+                string filePath = commandLineArgs[1];
+                Workspace.LoadWorkspace(filePath);
+            }
+            else
+            {
+                Workspace.LoadWorkspace();
+            }
+
+            (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
         }
 
         private void OpenEmployeeRibbonButton_Click(object sender, RoutedEventArgs e)
@@ -34,6 +50,25 @@ namespace EventMaster
         private void ContentFrame_Navigating(object sender, NavigatingCancelEventArgs e)
         {
             e.Cancel = false;
+        }
+
+        private void NewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Workspace.CreateNewWorkspace();
+            (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
+        }
+
+        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Workspace.LoadWorkspace();
+            (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
+        }
+
+        private void SaveMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel)?.PreDataSaveInvoke();
+            Workspace.SaveCurrentWorkspace();
+            (DataContext as MainViewModel)?.NotifyIsWorkspaceActiveChanged();
         }
     }
 }

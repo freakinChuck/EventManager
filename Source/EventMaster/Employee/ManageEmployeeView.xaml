@@ -9,13 +9,21 @@
       Title="ManageEmployeeView">
 
     <DockPanel>
-        <ListView DockPanel.Dock="Left" Width="211" ItemsSource="{Binding AllEmployees}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid DockPanel.Dock="Left" Width="211">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding AllEmployees}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single" Grid.Row="0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Row="1" Padding="5,5,5,5">Neuer Mitarbeiter</Button>
+        </Grid>
+        
         <Grid>
             <Grid.Resources>
                 <Style TargetType="{x:Type TextBox}">

@@ -1,10 +1,22 @@
-﻿using System.ComponentModel;
+﻿using EventMaster.Storage.Model;
+using System.ComponentModel;
 
 namespace EventMaster.Employee
 {
     public class EmployeeViewModel : INotifyPropertyChanged
     {
+        public EmployeeViewModel(EmployeeModel storageEmployee)
+        {
+            id = storageEmployee.Id;
+            name = storageEmployee.Name;
+            firstname = storageEmployee.Firstname;
+        }
+
+        private string id;
         private string name;
+        private string firstname;
+
+        public string Id => id;
 
         public string Name
         {
@@ -16,9 +28,6 @@ namespace EventMaster.Employee
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
             }
         }
-
-        private string firstname;
-
 
         public string Firstname
         {
@@ -34,6 +43,5 @@ namespace EventMaster.Employee
         public string DisplayName => $"{Name} {Firstname}";
 
         public event PropertyChangedEventHandler PropertyChanged;
-
     }
 }

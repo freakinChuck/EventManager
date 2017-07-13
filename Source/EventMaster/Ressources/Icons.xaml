@@ -1,5 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:EventMaster">
-    <BitmapImage x:Key="MyImageSource" UriSource="image.png" />
+    <BitmapImage x:Key="EmployeesImage" UriSource="Icons/285641 - id user.png" />
+    <BitmapImage x:Key="SaveImage" UriSource="Icons/285657 - floppy save.png" />
+    <BitmapImage x:Key="NewFileImage" UriSource="Icons/285688 - empty file.png" />
+    <BitmapImage x:Key="OpenFileImage" UriSource="Icons/299060 - folder.png" />
+    <BitmapImage x:Key="InfoImage" UriSource="Icons/299086 - info sign.png" />
+    <BitmapImage x:Key="SettingsImage" UriSource="Icons/299100 - screwdriver wrench.png" />
 </ResourceDictionary>

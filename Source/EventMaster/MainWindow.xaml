@@ -14,13 +14,17 @@
         <Ribbon x:Name="RibbonWin" DockPanel.Dock="Top" SelectedIndex="0">
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu>
-                    <RibbonApplicationMenuItem Header="Info"/>
-                    <RibbonApplicationMenuItem Header="Beenden"/>
+                    <RibbonApplicationMenuItem Name="NewMenuItem" Header="Neu" ImageSource="{StaticResource NewFileImage}" Click="NewMenuItem_Click" />
+                    <RibbonApplicationMenuItem Name="OpenMenuItem" Header="Öffnen" ImageSource="{StaticResource OpenFileImage}" Click="OpenMenuItem_Click" />
+                    <RibbonApplicationMenuItem Name="SaveMenuItem" Header="Speichern" ImageSource="{StaticResource SaveImage}" Click="SaveMenuItem_Click" IsEnabled="{Binding IsWorkspaceActive}" />
+                    <RibbonApplicationSplitMenuItem IsEnabled="False" Height="20" />
+                    <RibbonApplicationMenuItem Header="Einstellungen" ImageSource="{StaticResource SettingsImage}"/>
+                    <RibbonApplicationMenuItem Header="Info" ImageSource="{StaticResource InfoImage}"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
-            <RibbonTab Header="Verwaltung">
+            <RibbonTab Header="Verwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Stammdaten">
-                    <RibbonButton Name="OpenEmployeeRibbonButton" Label="Mitarbeiter" LargeImageSource="{StaticResource MyImageSource}" Click="OpenEmployeeRibbonButton_Click" />
+                    <RibbonButton Name="OpenEmployeeRibbonButton" Label="Mitarbeiter" LargeImageSource="{StaticResource EmployeesImage}" Click="OpenEmployeeRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>

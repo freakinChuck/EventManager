@@ -18,9 +18,9 @@ configuration: Release
 #  - Release
 
 build:
-  project: EventMaster.Source/EventMaster.Source.sln      # path to Visual Studio solution or project
+  project: Source/EventMaster.sln      # path to Visual Studio solution or project
 
 artifacts:
   # pushing a single file with environment variable in path and "Deployment name" specified
-  - path: EventMaster.Source\EventMaster.Source\bin\$(configuration)
+  - path: Source\EventMaster\bin\$(configuration)
     name: EventMaster
