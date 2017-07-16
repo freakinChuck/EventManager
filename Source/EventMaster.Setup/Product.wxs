@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define EventMaster_TargetDir=$(var.EventMaster.TargetDir)?>
 	<Product Id="*" Name="EventMaster" Language="1033" Version="1.0.0.0" Manufacturer="Silvio Stappung" UpgradeCode="63b13fda-8108-4194-95a8-dfd3009d5305">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+		<MediaTemplate EmbedCab="yes" />
 
 		<Feature Id="ProductFeature" Title="EventMaster.Setup" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
@@ -16,6 +16,9 @@
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="EventMaster.Setup" />
 			</Directory>
+    <Directory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="EventMaster" />
+    </Directory>
 		</Directory>
 	</Fragment>
 
@@ -24,6 +27,8 @@
     For STARTMENU Shortcut:
     http://wixtoolset.org/documentation/manual/v3/howtos/files_and_registry/create_start_menu_shortcut.html
     
+    File EXTENSIONS: 
+    https://stackoverflow.com/questions/138550/how-to-register-file-types-extensions-with-a-wix-installer
       -->
       
 	<Fragment>
@@ -32,7 +37,16 @@
 			 <Component Id="ProductComponent"> 
 				<!-- TODO: Insert files, registry keys, and other resources here. -->
          <File Source="$(var.EventMaster.TargetPath)" />
-			 </Component> 
+			 </Component>
+			<Component Id="EventMaster.exe" Guid="117a7b01-c46b-421d-a178-82821bba92e8">
+			  <File Id="EventMaster.exe" Name="EventMaster.exe" Source="$(var.EventMaster_TargetDir)EventMaster.exe" />
+			</Component>
+			<Component Id="EventMaster.Storage.dll" Guid="a3d593a9-717e-4990-a794-a4d3e5e38eec">
+			  <File Id="EventMaster.Storage.dll" Name="EventMaster.Storage.dll" Source="$(var.EventMaster_TargetDir)EventMaster.Storage.dll" />
+			</Component>
+			<Component Id="EventMaster.exe.config" Guid="1e6c0f4a-eb66-41eb-aece-f06241e5d42c">
+			  <File Id="EventMaster.exe.config" Name="EventMaster.exe.config" Source="$(var.EventMaster_TargetDir)EventMaster.exe.config" />
+			</Component> 
 		</ComponentGroup>
     
 	</Fragment>
