@@ -13,6 +13,7 @@ namespace EventMaster.Storage.Model
 
         }
         public string Id { get; set; }
+        public string EmployeeCourseLeaderId { get; set; }
         public DateTime DateAndTime { get; set; }
 
         public static CourseModel CreateNewCourse()

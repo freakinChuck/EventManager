@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace EventMaster.Storage.Model
 {
-    public class CoursePeriodModel
+    public class CourseTypePeriodModel
     {
-        internal CoursePeriodModel()
+        internal CourseTypePeriodModel()
         {
 
         }
         public string Id { get; set; }
         public string PeriodName { get; set; }
 
-        public static CoursePeriodModel CreateNewCourseType()
+        public static CourseTypePeriodModel CreateNewCourseTypePeriodModel()
         {
-            var model = new CoursePeriodModel();
+            var model = new CourseTypePeriodModel();
             model.Id = Guid.NewGuid().ToString();
-            Workspace.CurrentData.CoursePeriods.Add(model);
+            Workspace.CurrentData.CourseTypePeriods.Add(model);
             return model;
         }
     }
