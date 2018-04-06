@@ -30,7 +30,7 @@ build_script:
   - choco install "msbuild-sonarqube-runner" -y
   - SonarScanner.MSBuild.exe begin /k:"EventMaster_SonarCube" /d:sonar.organization="freakinchuck-github" /d:sonar.host.url="https://sonarcloud.io" /d:"sonar.login=%SonarQubeToken%"
   - msbuild "Source/EventMaster.sln"
-- SonarScanner.MSBuild.exe end /d:"sonar.login=%SonarQubeToken%"
+  - SonarScanner.MSBuild.exe end /d:"sonar.login=%SonarQubeToken%"
 #build:
 #  project: Source/EventMaster.sln      # path to Visual Studio solution or project
 
