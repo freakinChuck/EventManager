@@ -21,7 +21,7 @@ assembly_info:
   file: AssemblyInfo.*
   assembly_version: "1.{version}"
   assembly_file_version: "1.{version}"
-assembly_informational_version: "1.{version}"
+  assembly_informational_version: "1.{version}"
 
 
 before_build:
