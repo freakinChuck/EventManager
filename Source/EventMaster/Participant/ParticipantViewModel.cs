@@ -88,7 +88,7 @@ namespace EventMaster.Participant
 
         internal void RemoveParticipantFromModel()
         {
-            Workspace.CurrentData.Participants.Remove(storageParticipant);
+            Workspace.CurrentData.CourseParticipants.Remove(storageParticipant);
             Workspace.RegisterDataChanged();
         }
     }

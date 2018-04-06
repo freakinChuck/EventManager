@@ -36,7 +36,7 @@
 			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
 			 <Component Id="ProductComponent"> 
 				<!-- TODO: Insert files, registry keys, and other resources here. -->
-         <File Source="$(var.EventMaster.TargetPath)" />
+         <!--<File Source="$(var.EventMaster.TargetPath)" />-->
 			 </Component>
 			<Component Id="EventMaster.exe" Guid="117a7b01-c46b-421d-a178-82821bba92e8">
 			  <File Id="EventMaster.exe" Name="EventMaster.exe" Source="$(var.EventMaster_TargetDir)EventMaster.exe" />
