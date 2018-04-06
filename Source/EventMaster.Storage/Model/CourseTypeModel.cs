@@ -8,7 +8,7 @@ namespace EventMaster.Storage.Model
 {
     public class CourseTypeModel
     {
-        internal CourseTypeModel()
+        public CourseTypeModel()
         {
 
         }

@@ -10,10 +10,12 @@ namespace EventMaster.Storage.Model
     {
         internal CoursePeriodModel()
         {
-
+            CourseTypes = new List<string>();
         }
         public string Id { get; set; }
         public string PeriodName { get; set; }
+
+        public List<string> CourseTypes { get; set; }
 
         public static CoursePeriodModel CreateNewCoursePeriod()
         {

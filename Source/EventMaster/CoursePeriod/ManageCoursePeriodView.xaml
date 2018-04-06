@@ -38,8 +38,6 @@
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -50,6 +48,24 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Bezeichnung</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedCoursePeriod.PeriodName, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+
+            <ItemsControl ItemsSource="{Binding AllCourseTypes}" Grid.Row="1" Grid.ColumnSpan="4">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding TypeName}" Width="150" />
+
+                            <Button Width="20px" Command="{Binding SubtractCourseTypeCommand}">-</Button>
+                            <TextBlock Text="" Width="20" />
+                            <TextBlock Width="100" Text="{Binding NumberOfRequiredTypesString}" />
+                            <TextBlock Text="" Width="20" />
+                            <Button Width="20px" Command="{Binding AddCourseTypeCommand}">+</Button>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
         </Grid>
     </DockPanel>
 </Page>

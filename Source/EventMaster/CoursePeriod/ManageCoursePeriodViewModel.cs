@@ -38,6 +38,7 @@ namespace EventMaster.CoursePeriod
             set
             {
                 selectedCoursePeriod = value;
+                LoadJobs();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedCoursePeriod)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCoursePeriodSelected)));
             }
@@ -69,5 +70,23 @@ namespace EventMaster.CoursePeriod
         }
 
         public bool IsCoursePeriodSelected => SelectedCoursePeriod != null;
+
+        public BindingList<CourseTypeViewModel> AllCourseTypes
+        {
+            get; set;
+        }
+        private void LoadJobs()
+        {
+            var period = this.SelectedCoursePeriod;
+            if (period == null)
+            {
+                this.AllCourseTypes = new BindingList<CourseTypeViewModel>();
+            }
+            else
+            {
+                this.AllCourseTypes = new BindingList<CourseTypeViewModel>(Workspace.CurrentData.CourseTypes.OrderBy(x => x.TypeName).Select(x => new CourseTypeViewModel(SelectedCoursePeriod.storageCoursePeriod, x)).ToList());
+            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AllCourseTypes)));
+        }
     }
 }

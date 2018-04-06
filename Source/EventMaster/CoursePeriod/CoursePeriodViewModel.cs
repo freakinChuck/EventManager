@@ -18,7 +18,7 @@ namespace EventMaster.CoursePeriod
             Workspace.RegisterDataChanged();
         }
 
-        private CoursePeriodModel storageCoursePeriod;
+        internal CoursePeriodModel storageCoursePeriod;
 
         public string Id => storageCoursePeriod.Id;
 
