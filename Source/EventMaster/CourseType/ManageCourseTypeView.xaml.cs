@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace EventMaster.CourseType
+{
+    /// <summary>
+    /// Interaction logic for ManageCourseTypeView.xaml
+    /// </summary>
+    public partial class ManageCourseTypeView : Page
+    {
+        public ManageCourseTypeView()
+        {
+            InitializeComponent();
+            this.DataContext = new ManageCourseTypeViewModel();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                var newSelectedItem = e.AddedItems[0] as CourseTypeViewModel;
+                ((ManageCourseTypeViewModel)this.DataContext).SelectedCourseType = newSelectedItem;
+            }
+            else
+            {
+                ((ManageCourseTypeViewModel)this.DataContext).SelectedCourseType = null;
+            }
+        }
+    }
+}

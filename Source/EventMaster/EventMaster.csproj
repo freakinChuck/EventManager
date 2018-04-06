@@ -55,13 +55,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CoursePeriod\CoursePeriodViewModel.cs" />
+    <Compile Include="CoursePeriod\ManageCoursePeriodView.xaml.cs">
+      <DependentUpon>ManageCoursePeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CoursePeriod\ManageCoursePeriodViewModel.cs" />
+    <Compile Include="CourseType\CourseTypeViewModel.cs" />
+    <Compile Include="Employee\ManageEmployeeView.xaml.cs">
+      <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\ManageEmpolyeeViewModel.cs" />
     <Compile Include="Participant\ManageParticipantView.xaml.cs">
       <DependentUpon>ManageParticipantView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Participant\ManageParticipantViewModel.cs" />
     <Compile Include="Participant\ParticipantViewModel.cs" />
     <Compile Include="_Helper\BindingCommand.cs" />
+    <Page Include="CoursePeriod\ManageCoursePeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Employee\ManageEmployeeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CourseType\ManageCourseTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,10 +100,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Employee\EmployeeViewModel.cs" />
-    <Compile Include="Employee\ManageEmployeeView.xaml.cs">
-      <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
+    <Compile Include="CourseType\ManageCourseTypeView.xaml.cs">
+      <DependentUpon>ManageCourseTypeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee\ManageEmpolyeeViewModel.cs" />
+    <Compile Include="CourseType\ManageCourseTypeViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -138,5 +156,6 @@
   <ItemGroup>
     <Resource Include="Ressources\Icons\285648 - group user.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

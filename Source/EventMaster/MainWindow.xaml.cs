@@ -104,7 +104,16 @@ namespace EventMaster
         private void OpenParticipantsRibbonButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Content = new Participant.ManageParticipantView();
+        }
 
+        private void OpenCourseTypesRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new CourseType.ManageCourseTypeView();
+        }
+
+        private void OpenPeriodsRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new CoursePeriod.ManageCoursePeriodView();
         }
     }
 }

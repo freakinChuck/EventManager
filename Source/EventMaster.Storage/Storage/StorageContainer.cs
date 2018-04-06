@@ -15,7 +15,6 @@ namespace EventMaster.Storage.Storage
             Courses = new List<CourseModel>();
             CourseTypes = new List<CourseTypeModel>();
             CoursePeriods = new List<CoursePeriodModel>();
-            CourseTypePeriods = new List<CourseTypePeriodModel>();
             ParticipantPeriods = new List<ParticipantPeriodModel>();
         }
         public List<EmployeeModel> Employees { get; set; }
@@ -24,7 +23,6 @@ namespace EventMaster.Storage.Storage
         public List<CourseModel> Courses { get; set; }
         public List<CourseTypeModel> CourseTypes { get; set; }
         public List<CoursePeriodModel> CoursePeriods { get; set; }
-        public List<CourseTypePeriodModel> CourseTypePeriods { get; set; }
         public List<ParticipantPeriodModel> ParticipantPeriods { get; internal set; }
     }
 }
