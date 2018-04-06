@@ -9,16 +9,30 @@ platform: Any CPU
 #  - x86
 #  - Any CPU
 
-# build Configuration, i.e. Debug, Release, etc.
-configuration: Release
-
 # to add several configurations to build matrix:
 #configuration:
 #  - Debug
 #  - Release
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Release
 
-build:
-  project: Source/EventMaster.sln      # path to Visual Studio solution or project
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "1.{version}"
+  assembly_file_version: "1.{version}"
+assembly_informational_version: "1.{version}"
+
+
+before_build:
+  - nuget restore Source/EventMaster.sln
+build_script:
+  - choco install "msbuild-sonarqube-runner" -y
+  - SonarScanner.MSBuild.exe begin /k:"EventMaster_SonarCube" /d:sonar.organization="freakinchuck-github" /d:sonar.host.url="https://sonarcloud.io" /d:"sonar.login=%SonarQubeToken%"
+  - msbuild "Source/EventMaster.sln"
+- SonarScanner.MSBuild.exe end /d:"sonar.login=%SonarCubeToken%"
+#build:
+#  project: Source/EventMaster.sln      # path to Visual Studio solution or project
 
 artifacts:
   # pushing a single file with environment variable in path and "Deployment name" specified
