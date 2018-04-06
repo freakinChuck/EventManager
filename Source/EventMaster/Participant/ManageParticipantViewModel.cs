@@ -25,7 +25,7 @@ namespace EventMaster.Participant
 
         public ManageParticipantViewModel()
         {
-            AllParticipants = new BindingList<ParticipantViewModel>(Workspace.CurrentData.CourseParticipants.Select(x => new ParticipantViewModel(x)).ToList());
+            AllParticipants = new BindingList<ParticipantViewModel>(Workspace.CurrentData.Participants.Select(x => new ParticipantViewModel(x)).ToList());
             SelectedParticipant = null;
         }
 
