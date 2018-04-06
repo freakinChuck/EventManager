@@ -38,6 +38,7 @@ namespace EventMaster.Participant
             set
             {
                 selectedParticipant = value;
+                LoadPeriods();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedParticipant)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsParticipantSelected)));
             }
@@ -69,5 +70,24 @@ namespace EventMaster.Participant
         }
 
         public bool IsParticipantSelected => SelectedParticipant != null;
+
+
+        public BindingList<ParticipantPeriodViewModel> AllPeriods
+        {
+            get; set;
+        }
+        private void LoadPeriods()
+        {
+            var participant = this.SelectedParticipant;
+            if (participant == null)
+            {
+                this.AllPeriods = new BindingList<ParticipantPeriodViewModel>();
+            }
+            else
+            {
+                this.AllPeriods = new BindingList<ParticipantPeriodViewModel>(Workspace.CurrentData.CoursePeriods.OrderBy(x => x.PeriodName).Select(x => new ParticipantPeriodViewModel(SelectedParticipant.storageParticipant, x)).ToList());
+            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AllPeriods)));
+        }
     }
 }

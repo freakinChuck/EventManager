@@ -66,6 +66,7 @@
       <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\ManageEmpolyeeViewModel.cs" />
+    <Compile Include="Participant\ParticipantPeriodViewModel.cs" />
     <Compile Include="Participant\ManageParticipantView.xaml.cs">
       <DependentUpon>ManageParticipantView.xaml</DependentUpon>
     </Compile>

@@ -10,7 +10,7 @@ namespace EventMaster.Storage.Model
     {
         internal ParticipantModel()
         {
-
+            PeriodIds = new List<string>();
         }
         public string Id { get; set; }
         public string Name { get; set; }
@@ -18,8 +18,7 @@ namespace EventMaster.Storage.Model
         public string Address { get; set; }
         public string Town { get; set; }
         public string AdditionalInformation { get; set; }
-
-        public bool Active { get; set; }
+        public List<string> PeriodIds { get; set; }
 
         public static ParticipantModel CreateNewParticipant()
         {

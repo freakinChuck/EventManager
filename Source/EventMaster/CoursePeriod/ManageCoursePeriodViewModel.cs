@@ -38,7 +38,7 @@ namespace EventMaster.CoursePeriod
             set
             {
                 selectedCoursePeriod = value;
-                LoadJobs();
+                LoadPeriods();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedCoursePeriod)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCoursePeriodSelected)));
             }
@@ -75,7 +75,7 @@ namespace EventMaster.CoursePeriod
         {
             get; set;
         }
-        private void LoadJobs()
+        private void LoadPeriods()
         {
             var period = this.SelectedCoursePeriod;
             if (period == null)

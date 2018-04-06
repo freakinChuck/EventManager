@@ -43,6 +43,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -62,11 +63,24 @@
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedParticipant.Town, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="4">Zusatzinfo</Label>
             <TextBox MinLines="3" Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedParticipant.AdditionalInformation, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
-            <Label Grid.Column="0" Grid.Row="5">Aktiv</Label>
-            <CheckBox Grid.Column="1" Grid.Row="5" Margin="0,5,5,5" IsChecked="{Binding Path=SelectedParticipant.Active, Mode=TwoWay}" Grid.ColumnSpan="2"></CheckBox>
 
-            <DataGrid Grid.Row="7" Grid.ColumnSpan="4" />
+            <ItemsControl ItemsSource="{Binding AllPeriods}" Grid.Row="6" Grid.ColumnSpan="4">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding PeriodName}" Width="150" />
 
+                            <Button Width="20px" Command="{Binding SubtractParticipantPeriodCommand}" IsEnabled="{Binding MinusEnabled}">-</Button>
+                            <TextBlock Text="" Width="20" />
+                            <TextBlock Width="50" Text="{Binding NumberOfPeriodsString}" />
+                            <TextBlock Text="" Width="20" />
+                            <Button Width="20px" Command="{Binding AddParticipantPeriodCommand}" IsEnabled="{Binding AddEnabled}">+</Button>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
         </Grid>
     </DockPanel>
 </Page>

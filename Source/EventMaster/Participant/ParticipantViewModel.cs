@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System;
 using EventMaster.Storage;
+using System.Collections.Generic;
 
 namespace EventMaster.Participant
 {
@@ -18,7 +19,7 @@ namespace EventMaster.Participant
             Workspace.RegisterDataChanged();
         }
 
-        private ParticipantModel storageParticipant;
+        internal ParticipantModel storageParticipant;
 
         public string Id => storageParticipant.Id;
 
@@ -72,13 +73,13 @@ namespace EventMaster.Participant
             }
         }
 
-        public bool Active
+        public List<string> PeriodIds
         {
-            get { return storageParticipant.Active; }
+            get { return storageParticipant.PeriodIds; }
             set
             {
-                storageParticipant.Active = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Active"));
+                storageParticipant.PeriodIds = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PeriodIds"));
             }
         }
 
