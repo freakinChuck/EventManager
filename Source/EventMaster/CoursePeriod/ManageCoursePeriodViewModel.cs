@@ -25,7 +25,7 @@ namespace EventMaster.CoursePeriod
 
         public ManageCoursePeriodViewModel()
         {
-            AllCoursePeriods = new BindingList<CoursePeriodViewModel>(Workspace.CurrentData.CoursePeriods.Select(x => new CoursePeriodViewModel(x)).ToList());
+            AllCoursePeriods = new BindingList<CoursePeriodViewModel>(Workspace.CurrentData.CoursePeriods.OrderBy(x => x.PeriodName).Select(x => new CoursePeriodViewModel(x)).ToList());
             SelectedCoursePeriod = null;
         }
 

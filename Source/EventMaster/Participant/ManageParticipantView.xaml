@@ -44,6 +44,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -61,8 +63,15 @@
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedParticipant.Address, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="3">Ort</Label>
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedParticipant.Town, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
-            <Label Grid.Column="0" Grid.Row="4">Zusatzinfo</Label>
-            <TextBox MinLines="3" Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedParticipant.AdditionalInformation, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="4">Telefon</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedParticipant.Telefon, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="5">Email</Label>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=SelectedParticipant.Email, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            
+            <Label Grid.Column="0" Grid.Row="6">Zusatzinfo</Label>
+            <TextBox MinLines="3" Grid.Column="1" Grid.Row="6" Text="{Binding Path=SelectedParticipant.AdditionalInformation, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
 
             <ItemsControl ItemsSource="{Binding AllPeriods}" Grid.Row="6" Grid.ColumnSpan="4">
                 <ItemsControl.ItemTemplate>

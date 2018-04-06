@@ -63,6 +63,26 @@ namespace EventMaster.Participant
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Town"));
             }
         }
+
+        public string Telefon
+        {
+            get { return storageParticipant.Telefon; }
+            set
+            {
+                storageParticipant.Telefon = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Telefon"));
+            }
+        }
+
+        public string Email
+        {
+            get { return storageParticipant.Email; }
+            set
+            {
+                storageParticipant.Email = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
+            }
+        }
         public string AdditionalInformation
         {
             get { return storageParticipant.AdditionalInformation; }

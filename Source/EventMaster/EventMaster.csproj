@@ -62,6 +62,11 @@
     </Compile>
     <Compile Include="CoursePeriod\ManageCoursePeriodViewModel.cs" />
     <Compile Include="CourseType\CourseTypeViewModel.cs" />
+    <Compile Include="Course\CourseViewModel.cs" />
+    <Compile Include="Course\ManageCourseView.xaml.cs">
+      <DependentUpon>ManageCourseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Course\ManageCourseViewModel.cs" />
     <Compile Include="Employee\ManageEmployeeView.xaml.cs">
       <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
     </Compile>
@@ -73,7 +78,12 @@
     <Compile Include="Participant\ManageParticipantViewModel.cs" />
     <Compile Include="Participant\ParticipantViewModel.cs" />
     <Compile Include="_Helper\BindingCommand.cs" />
+    <Compile Include="_Helper\IdNameHelper.cs" />
     <Page Include="CoursePeriod\ManageCoursePeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Course\ManageCourseView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -158,8 +168,6 @@
   <ItemGroup>
     <Resource Include="Ressources\Icons\285648 - group user.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Course\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

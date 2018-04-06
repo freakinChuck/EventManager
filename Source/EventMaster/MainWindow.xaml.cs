@@ -115,5 +115,11 @@ namespace EventMaster
         {
             ContentFrame.Content = new CoursePeriod.ManageCoursePeriodView();
         }
+
+        private void OpenCoursesRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new Course.ManageCourseView();
+
+        }
     }
 }

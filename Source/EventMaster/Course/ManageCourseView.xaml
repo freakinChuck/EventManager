@@ -1,0 +1,77 @@
+﻿<Page x:Class="EventMaster.Course.ManageCourseView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventMaster.Course"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="600"
+      Title="ManageCourseView">
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Left" Width="211">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.ColumnSpan="2" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding AllCourses}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single" Grid.Row="0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Titel" Width="200" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Column="0" Grid.Row="1" Padding="5,5,5,5" Command="{Binding NewCourseCommand}">Neu</Button>
+            <Button Grid.Column="1" Grid.Row="1" Padding="5,5,5,5" Command="{Binding RemoveCourseCommand}" IsEnabled="{Binding IsCourseSelected}" >Entfernen</Button>
+
+        </Grid>
+
+        <Grid IsEnabled="{Binding IsCourseSelected}">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Periode</Label>
+            <ComboBox Grid.Column="1" Grid.Row="0" SelectedValue="{Binding Path=SelectedCourse.PeriodeId, Mode=TwoWay}" ItemsSource="{Binding AllPeriods}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+            <Label Grid.Column="0" Grid.Row="1">Kursnummer</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedCourse.CourseNumber, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2">Titel</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Name, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="3">Datum</Label>
+            <DatePicker Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.Date, Mode=TwoWay, ConverterCulture=de-CH }" Grid.ColumnSpan="2"></DatePicker>
+            <Label Grid.Column="0" Grid.Row="4">Zeit</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedCourse.Time, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="5">Treffpunkt</Label>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=SelectedCourse.MeetPoint, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="6">Leitung</Label>
+            <ComboBox Grid.Column="1" Grid.Row="6" SelectedValue="{Binding Path=SelectedCourse.EmployeeCourseLeaderId, Mode=TwoWay}" ItemsSource="{Binding AllEmployees}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+            <Label Grid.Column="0" Grid.Row="7">Max. Teilnehmer</Label>
+            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedCourse.MaxNumberOfParticipants, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="8">Kurstyp</Label>
+            <ComboBox Grid.Column="1" Grid.Row="8" SelectedValue="{Binding Path=SelectedCourse.CourseTypeId, Mode=TwoWay}" ItemsSource="{Binding AllCourseTypes}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+        </Grid>
+    </DockPanel>
+</Page>

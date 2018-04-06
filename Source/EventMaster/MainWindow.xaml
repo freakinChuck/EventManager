@@ -36,7 +36,7 @@
                 <RibbonGroup Header="Stammdaten">
                     <RibbonButton x:Name="OpenParticipantsRibbonButton" Label="Teilnehmer" LargeImageSource="{StaticResource ParticipantsImage}" Click="OpenParticipantsRibbonButton_Click" />
                     <RibbonButton x:Name="OpenEmployeeRibbonButton" Label="Mitarbeiter" LargeImageSource="{StaticResource EmployeesImage}" Click="OpenEmployeeRibbonButton_Click" />
-                    <RibbonButton x:Name="OpenCoursesRibbonButton" Label="Kurse" />
+                    <RibbonButton x:Name="OpenCoursesRibbonButton" Label="Kurse" Click="OpenCoursesRibbonButton_Click" />
                 </RibbonGroup>
                 <RibbonGroup Header="Konfiguration">
                     <RibbonButton x:Name="OpenCourseTypesRibbonButton" Label="Kurstyp" Click="OpenCourseTypesRibbonButton_Click" />

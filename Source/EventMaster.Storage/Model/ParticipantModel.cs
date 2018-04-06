@@ -17,6 +17,8 @@ namespace EventMaster.Storage.Model
         public string Firstname { get; set; }
         public string Address { get; set; }
         public string Town { get; set; }
+        public string Telefon { get; set; }
+        public string Email { get; set; }
         public string AdditionalInformation { get; set; }
         public List<string> PeriodIds { get; set; }
 
