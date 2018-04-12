@@ -125,6 +125,8 @@ namespace EventMaster
         private void OpenRegistrationRibbonButton_Click(object sender, RoutedEventArgs e)
         {
             var registrationWindow = new CourseRegistration.CourseRegistrationWindow();
+            //registrationWindow.Parent = this;
+            //ContentFrame.Content = registrationWindow.Content;
             registrationWindow.Show();
         }
     }

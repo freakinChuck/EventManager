@@ -25,22 +25,25 @@
             </Ribbon.ApplicationMenu>
             <RibbonTab Header="Kursverwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Teilnehmer">
-                    <RibbonButton x:Name="OpenRegistrationRibbonButton" Label="Anmeldungen" Click="OpenRegistrationRibbonButton_Click" />
-                    <RibbonButton x:Name="OpenPresenceRibbonButton" Label="Anwesenheitsprüfung" />
+                    <RibbonButton x:Name="OpenRegistrationRibbonButton" Label="Anmeldungen" LargeImageSource="{StaticResource RegistrationImage}" Click="OpenRegistrationRibbonButton_Click" />
+                    <RibbonButton x:Name="OpenPresenceRibbonButton" Label="Anwesenheitsprüfung" LargeImageSource="{StaticResource PresenceImage}" />
                 </RibbonGroup>
                 <RibbonGroup Header="Auswertung">
                     <RibbonButton x:Name="ListsRibbonButton" Label="Listen" />
+                </RibbonGroup>
+                <RibbonGroup Header="Verwaltung">
+                    <RibbonButton Label="Kurse" LargeImageSource="{StaticResource CourseImage}" Click="OpenCoursesRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Verwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Stammdaten">
                     <RibbonButton x:Name="OpenParticipantsRibbonButton" Label="Teilnehmer" LargeImageSource="{StaticResource ParticipantsImage}" Click="OpenParticipantsRibbonButton_Click" />
                     <RibbonButton x:Name="OpenEmployeeRibbonButton" Label="Mitarbeiter" LargeImageSource="{StaticResource EmployeesImage}" Click="OpenEmployeeRibbonButton_Click" />
-                    <RibbonButton x:Name="OpenCoursesRibbonButton" Label="Kurse" Click="OpenCoursesRibbonButton_Click" />
+                    <RibbonButton x:Name="OpenCoursesRibbonButton" Label="Kurse" LargeImageSource="{StaticResource CourseImage}" Click="OpenCoursesRibbonButton_Click" />
                 </RibbonGroup>
                 <RibbonGroup Header="Konfiguration">
-                    <RibbonButton x:Name="OpenCourseTypesRibbonButton" Label="Kurstyp" Click="OpenCourseTypesRibbonButton_Click" />
-                    <RibbonButton x:Name="OpenPeriodsRibbonButton" Label="Perioden" Click="OpenPeriodsRibbonButton_Click" />
+                    <RibbonButton x:Name="OpenCourseTypesRibbonButton" Label="Kurstyp" LargeImageSource="{StaticResource CourseTypeImage}" Click="OpenCourseTypesRibbonButton_Click" />
+                    <RibbonButton x:Name="OpenPeriodsRibbonButton" Label="Perioden" LargeImageSource="{StaticResource PeriodsImage}" Click="OpenPeriodsRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>

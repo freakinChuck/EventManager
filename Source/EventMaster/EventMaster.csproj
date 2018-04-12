@@ -177,6 +177,16 @@
   <ItemGroup>
     <Resource Include="Ressources\Icons\285648 - group user.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Ressources\Icons\285670 - calendar.png" />
+    <Resource Include="Ressources\Icons\285673 - clock.png" />
+    <Resource Include="Ressources\Icons\299058 - tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icons\285659 - map marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icons\299064 - enveloppe letter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
