@@ -50,7 +50,7 @@ namespace EventMaster.CourseRegistration
         public BindingList<ParticipantViewModel> ParticipantsByPeriod { get; private set; }
         public string PeriodeId
         {
-            get => periodeId;
+            get { return periodeId; }
             set
             {
                 periodeId = value;
