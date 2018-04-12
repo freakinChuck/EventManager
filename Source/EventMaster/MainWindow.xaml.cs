@@ -121,5 +121,11 @@ namespace EventMaster
             ContentFrame.Content = new Course.ManageCourseView();
 
         }
+
+        private void OpenRegistrationRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            var registrationWindow = new CourseRegistration.CourseRegistrationWindow();
+            registrationWindow.Show();
+        }
     }
 }

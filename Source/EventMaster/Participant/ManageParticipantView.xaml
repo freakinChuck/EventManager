@@ -45,9 +45,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -73,7 +73,7 @@
             <Label Grid.Column="0" Grid.Row="6">Zusatzinfo</Label>
             <TextBox MinLines="3" Grid.Column="1" Grid.Row="6" Text="{Binding Path=SelectedParticipant.AdditionalInformation, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
 
-            <ItemsControl ItemsSource="{Binding AllPeriods}" Grid.Row="6" Grid.ColumnSpan="4">
+            <ItemsControl ItemsSource="{Binding AllPeriods}" Grid.Row="7" Grid.ColumnSpan="4">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="5">
@@ -89,6 +89,10 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+
+            <DataGrid Grid.Row="9" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedParticipant.Courses}" ></DataGrid>
+
+            <Button Grid.Row="10" Padding="5,5,5,5" Click="RegistrationButton_Click">Anmeldung</Button>
             
         </Grid>
     </DockPanel>

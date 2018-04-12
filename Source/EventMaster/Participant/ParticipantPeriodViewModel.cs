@@ -31,7 +31,7 @@ namespace EventMaster.Participant
 
         public string NumberOfPeriodsString
         {
-            get { return NumberOfPeriods > 0 ? "Aktiv" : "Inaktiv"; }
+            get { return NumberOfPeriods > 0 ? "Ja" : "Nein"; }
         }
 
         public bool AddEnabled

@@ -10,20 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EventMaster.Participant;
 
-namespace EventMaster.Participant
+namespace EventMaster.CourseRegistration
 {
     /// <summary>
-    /// Interaction logic for ManageParticipantView.xaml
+    /// Interaction logic for CourseRegistrationWindow.xaml
     /// </summary>
-    public partial class ManageParticipantView : Page
+    public partial class CourseRegistrationWindow : Window
     {
-        public ManageParticipantView()
+        public CourseRegistrationWindow()
         {
             InitializeComponent();
-            this.DataContext = new ManageParticipantViewModel();
+            this.DataContext = new CourseRegistrationViewModel();
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -31,18 +31,12 @@ namespace EventMaster.Participant
             if (e.AddedItems.Count > 0)
             {
                 var newSelectedItem = e.AddedItems[0] as ParticipantViewModel;
-                ((ManageParticipantViewModel)this.DataContext).SelectedParticipant = newSelectedItem;
+                ((CourseRegistrationViewModel)this.DataContext).SelectedParticipant = newSelectedItem;
             }
             else
             {
-                ((ManageParticipantViewModel)this.DataContext).SelectedParticipant = null;
+                ((CourseRegistrationViewModel)this.DataContext).SelectedParticipant = null;
             }
-        }
-
-        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
-        {
-            var registrationWindow = new CourseRegistration.CourseRegistrationWindow();
-            registrationWindow.Show();
         }
     }
 }

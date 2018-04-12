@@ -25,7 +25,7 @@
             </Ribbon.ApplicationMenu>
             <RibbonTab Header="Kursverwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Teilnehmer">
-                    <RibbonButton x:Name="OpenRegistrationRibbonButton" Label="Anmeldungen" />
+                    <RibbonButton x:Name="OpenRegistrationRibbonButton" Label="Anmeldungen" Click="OpenRegistrationRibbonButton_Click" />
                     <RibbonButton x:Name="OpenPresenceRibbonButton" Label="Anwesenheitsprüfung" />
                 </RibbonGroup>
                 <RibbonGroup Header="Auswertung">

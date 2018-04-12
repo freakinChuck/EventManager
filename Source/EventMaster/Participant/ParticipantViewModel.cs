@@ -1,6 +1,7 @@
 ﻿using EventMaster.Storage.Model;
 using System.ComponentModel;
 using System;
+using System.Linq;
 using EventMaster.Storage;
 using System.Collections.Generic;
 
@@ -102,6 +103,28 @@ namespace EventMaster.Participant
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PeriodIds"));
             }
         }
+
+        public List<CourseParticipantListViewModel> Courses
+        {
+            get
+            {
+                var participants = Workspace.CurrentData.CourseParticipants.Where(x => x.ParticipantId == this.Id).ToList();
+                var participantCourseMapping = participants.Select(x => new { Participant = x, Course = Workspace.CurrentData.Courses.Where(c => c.Id == x.CourseId).FirstOrDefault() }).ToList();
+                var displayPreperation = participantCourseMapping.Where(x => x.Course != null).Select(x => new { Participant = x.Participant, Course = x.Course, CourseLeader = Workspace.CurrentData.Employees.FirstOrDefault(e => e.Id == x.Course.EmployeeCourseLeaderId) }).ToList();
+                return displayPreperation.Select(x => new CourseParticipantListViewModel
+                {
+                    Periode = Workspace.CurrentData.CoursePeriods.Where(p => p.Id == x.Course.PeriodeId).FirstOrDefault()?.PeriodName ?? "unbekannte Periode",
+                    Titel = x.Course.Name,
+                    Kursnummer = x.Course.CourseNumber,
+                    Datum = $"{x.Course.Date.ToShortDateString()} - {x.Course.Time}",
+                    Kursleiter = x.CourseLeader != null ? ($"{ x.CourseLeader.Name } { x.CourseLeader.Firstname }") : "unbekannt",
+                    Anwesenheit = x.Participant.Present.HasValue ? (x.Participant.Present.Value ? "Anwesend" : "Abwesend") : "Offen",
+                    Ersatz = x.Participant.IsReplacementCourse ? "Ersatzkurs" : string.Empty,
+                    Laufnummer = x.Participant.SequencialNumber,
+                }).ToList();
+            }
+        }
+
 
         public string DisplayName => $"{Name} {Firstname}";
 

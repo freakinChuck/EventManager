@@ -61,6 +61,10 @@
       <DependentUpon>ManageCoursePeriodView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CoursePeriod\ManageCoursePeriodViewModel.cs" />
+    <Compile Include="CourseRegistration\CourseRegistrationViewModel.cs" />
+    <Compile Include="CourseRegistration\CourseRegistrationWindow.xaml.cs">
+      <DependentUpon>CourseRegistrationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CourseType\CourseTypeViewModel.cs" />
     <Compile Include="Course\CourseViewModel.cs" />
     <Compile Include="Course\ManageCourseView.xaml.cs">
@@ -71,6 +75,7 @@
       <DependentUpon>ManageEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\ManageEmpolyeeViewModel.cs" />
+    <Compile Include="Participant\CourseParticipantListViewModel.cs" />
     <Compile Include="Participant\ParticipantPeriodViewModel.cs" />
     <Compile Include="Participant\ManageParticipantView.xaml.cs">
       <DependentUpon>ManageParticipantView.xaml</DependentUpon>
@@ -82,6 +87,10 @@
     <Page Include="CoursePeriod\ManageCoursePeriodView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CourseRegistration\CourseRegistrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Course\ManageCourseView.xaml">
       <Generator>MSBuild:Compile</Generator>
