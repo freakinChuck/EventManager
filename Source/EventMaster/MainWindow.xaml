@@ -33,6 +33,7 @@
                 </RibbonGroup>
                 <RibbonGroup Header="Verwaltung">
                     <RibbonButton Label="Kurse" LargeImageSource="{StaticResource CourseImage}" Click="OpenCoursesRibbonButton_Click" />
+                    <RibbonButton Label="Teilnehmer" LargeImageSource="{StaticResource ParticipantsImage}" Click="OpenParticipantsRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Verwaltung" IsEnabled="{Binding IsWorkspaceActive}">
@@ -42,8 +43,8 @@
                     <RibbonButton x:Name="OpenEmployeeRibbonButton" Label="Kursleiter" LargeImageSource="{StaticResource EmployeesImage}" Click="OpenEmployeeRibbonButton_Click" />
                 </RibbonGroup>
                 <RibbonGroup Header="Konfiguration">
-                    <RibbonButton x:Name="OpenCourseTypesRibbonButton" Label="Kurstyp" LargeImageSource="{StaticResource CourseTypeImage}" Click="OpenCourseTypesRibbonButton_Click" />
                     <RibbonButton x:Name="OpenPeriodsRibbonButton" Label="Perioden" LargeImageSource="{StaticResource PeriodsImage}" Click="OpenPeriodsRibbonButton_Click" />
+                    <RibbonButton x:Name="OpenCourseTypesRibbonButton" Label="Kurstyp" LargeImageSource="{StaticResource CourseTypeImage}" Click="OpenCourseTypesRibbonButton_Click" />
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>

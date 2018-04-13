@@ -25,7 +25,7 @@ namespace EventMaster.Employee
 
         public ManageEmployeeViewModel()
         {
-            AllEmployees = new BindingList<EmployeeViewModel>(Workspace.CurrentData.Employees.Select(x => new EmployeeViewModel(x)).ToList());
+            AllEmployees = new BindingList<EmployeeViewModel>(Workspace.CurrentData.Employees.Select(x => new EmployeeViewModel(x)).OrderBy(x => x.DisplayName).ToList());
             SelectedEmployee = null;
         }
 

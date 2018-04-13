@@ -25,7 +25,7 @@ namespace EventMaster.CourseType
 
         public ManageCourseTypeViewModel()
         {
-            AllCourseTypes = new BindingList<CourseTypeViewModel>(Workspace.CurrentData.CourseTypes.Select(x => new CourseTypeViewModel(x)).ToList());
+            AllCourseTypes = new BindingList<CourseTypeViewModel>(Workspace.CurrentData.CourseTypes.Select(x => new CourseTypeViewModel(x)).OrderBy(x => x.TypeName).ToList());
             SelectedCourseType = null;
         }
 

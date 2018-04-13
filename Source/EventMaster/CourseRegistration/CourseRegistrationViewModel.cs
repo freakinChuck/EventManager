@@ -62,7 +62,7 @@ namespace EventMaster.CourseRegistration
 
         private void ReloadParticipants()
         {
-            ParticipantsByPeriod = new BindingList<ParticipantViewModel>(Workspace.CurrentData.Participants.Where(x => x.PeriodIds.Contains(PeriodeId)).Select(x => new ParticipantViewModel(x)).ToList());
+            ParticipantsByPeriod = new BindingList<ParticipantViewModel>(Workspace.CurrentData.Participants.Where(x => x.PeriodIds.Contains(PeriodeId)).Select(x => new ParticipantViewModel(x)).OrderBy(x => x.DisplayName).ToList());
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParticipantsByPeriod)));
         }
 

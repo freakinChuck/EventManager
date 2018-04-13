@@ -26,7 +26,7 @@ namespace EventMaster.Course
 
         public ManageCourseViewModel()
         {
-            AllCourses = new BindingList<CourseViewModel>(Workspace.CurrentData.Courses.Select(x => new CourseViewModel(x)).ToList());
+            AllCourses = new BindingList<CourseViewModel>(Workspace.CurrentData.Courses.Select(x => new CourseViewModel(x)).OrderBy(x => x.DisplayName).ToList());
             AllEmployees = new BindingList<IdNameHelper>(Workspace.CurrentData.Employees.Select(x => new IdNameHelper() { Id = x.Id, Name = $"{x.Firstname} {x.Name}" }).OrderBy(x => x.Name).ToList());
             AllCourseTypes = new BindingList<IdNameHelper>(Workspace.CurrentData.CourseTypes.Select(x => new IdNameHelper() { Id = x.Id, Name = x.TypeName }).OrderBy(x => x.Name).ToList());
             AllPeriods = new BindingList<IdNameHelper>(Workspace.CurrentData.CoursePeriods.Select(x => new IdNameHelper() { Id = x.Id, Name = x.PeriodName }).OrderBy(x => x.Name).ToList());
