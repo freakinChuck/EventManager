@@ -40,6 +40,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -52,6 +53,10 @@
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedEmployee.Name, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="1">Vorname</Label>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedEmployee.Firstname, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2">Email</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedEmployee.Email, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="3">Telefon</Label>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedEmployee.Phone, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
         </Grid>
     </DockPanel>
 </Page>

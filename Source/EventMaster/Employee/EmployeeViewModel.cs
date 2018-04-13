@@ -44,6 +44,25 @@ namespace EventMaster.Employee
             }
         }
 
+        public string Email
+        {
+            get { return storageEmployee.Email; }
+            set
+            {
+                storageEmployee.Email = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
+            }
+        }
+        public string Phone
+        {
+            get { return storageEmployee.Phone; }
+            set
+            {
+                storageEmployee.Phone = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Phone"));
+            }
+        }
+
         public string DisplayName => $"{Name} {Firstname}";
 
         public event PropertyChangedEventHandler PropertyChanged;
