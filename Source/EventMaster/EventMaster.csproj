@@ -66,6 +66,7 @@
       <DependentUpon>CourseRegistrationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CourseType\CourseTypeViewModel.cs" />
+    <Compile Include="Course\CourseParticipantListViewModel.cs" />
     <Compile Include="Course\CourseViewModel.cs" />
     <Compile Include="Course\ManageCourseView.xaml.cs">
       <DependentUpon>ManageCourseView.xaml</DependentUpon>

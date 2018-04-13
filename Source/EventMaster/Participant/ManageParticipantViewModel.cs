@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EventMaster.Participant
 {
@@ -43,6 +44,7 @@ namespace EventMaster.Participant
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsParticipantSelected)));
             }
         }
+        public CourseParticipantListViewModel SelectedCourse { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,6 +70,31 @@ namespace EventMaster.Participant
             //SelectedIndex = 0;
             selectedParticipant.RemoveParticipantFromModel();
         }
+        public BindingCommand UnregisterCommand
+        {
+            get { return new BindingCommand(x => Unregister()); }
+        }
+        private void Unregister()
+        {
+            var selectedCourse = SelectedCourse;
+            if (selectedCourse != null && SelectedParticipant != null)
+            {
+                var result = MessageBox.Show($"Möchten Sie { SelectedParticipant.DisplayName } wirklich vom Kurs '{ SelectedCourse.Kursnummer } - { SelectedCourse.Titel }' abmelden?", "Abmeldung", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var registration = Workspace.CurrentData.CourseParticipants.Where(x => x.Id == selectedCourse.AnmeldungsId).FirstOrDefault();
+                    if (registration != null)
+                    {
+                        Workspace.CurrentData.CourseParticipants.Remove(registration);
+                        Workspace.RegisterDataChanged();
+                        SelectedParticipant = this.SelectedParticipant;
+                    }
+                }
+            }
+        }
+
+
+        
 
         public bool IsParticipantSelected => SelectedParticipant != null;
 

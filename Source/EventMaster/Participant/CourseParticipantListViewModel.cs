@@ -12,5 +12,7 @@
         public int Laufnummer { get; set; }
 
         public string Ersatz { get; set; }
+
+        public string AnmeldungsId { get; set; }
     }
 }

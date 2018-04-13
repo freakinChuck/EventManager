@@ -46,7 +46,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -72,6 +74,14 @@
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedCourse.MaxNumberOfParticipants, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="8">Kurstyp</Label>
             <ComboBox Grid.Column="1" Grid.Row="8" SelectedValue="{Binding Path=SelectedCourse.CourseTypeId, Mode=TwoWay}" ItemsSource="{Binding AllCourseTypes}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+
+            <DataGrid Grid.Row="10" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedCourse.Participants}" SelectedItem="{Binding SelectedCourseParticipation}" ></DataGrid>
+
+            <StackPanel Grid.Row="11" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <Button Padding="5,5,5,5" Command="{Binding UnregisterCommand}">Ausgewählter Teilnehmer abmelden</Button>
+
+            </StackPanel>
+
         </Grid>
     </DockPanel>
 </Page>

@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System;
 using EventMaster.Storage;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EventMaster.Course
 {
@@ -125,8 +127,28 @@ namespace EventMaster.Course
             }
         }
 
+        
 
-
+        public List<CourseParticipantListViewModel> Participants
+        {
+            get
+            {
+                var participants = Workspace.CurrentData.CourseParticipants.Where(x => x.CourseId == this.Id).ToList();
+                var participantCourseMapping = participants.Select(x => new { Participant = x, Person = Workspace.CurrentData.Participants.Where(c => c.Id == x.ParticipantId).FirstOrDefault() }).ToList();
+                var displayPreperation = participantCourseMapping.Where(x => x.Person != null).Select(x => new { Participant = x.Participant, Person = x.Person }).ToList();
+                return displayPreperation.Select(x => new CourseParticipantListViewModel
+                {
+                    Vorname = x.Person.Firstname,
+                    Nachname = x.Person.Name,
+                    Email = x.Person.Email,
+                    Telefon = x.Person.Telefon,
+                    Anwesenheit = x.Participant.Present.HasValue ? (x.Participant.Present.Value ? "Anwesend" : "Abwesend") : "Offen",
+                    Ersatz = x.Participant.IsReplacementCourse ? "Ersatzkurs" : string.Empty,
+                    Laufnummer = x.Participant.SequencialNumber,
+                    AnmeldungsId = x.Participant.Id,
+                }).ToList();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EventMaster.Course
 {
@@ -69,6 +70,31 @@ namespace EventMaster.Course
             this.AllCourses.Remove(selectedCourse);
             //SelectedIndex = 0;
             selectedCourse.RemoveCourseFromModel();
+        }
+
+        public CourseParticipantListViewModel SelectedCourseParticipation { get; set; }
+
+        public BindingCommand UnregisterCommand
+        {
+            get { return new BindingCommand(x => Unregister()); }
+        }
+        private void Unregister()
+        {
+            var selectedCourseParticipation = SelectedCourseParticipation;
+            if (selectedCourseParticipation != null && SelectedCourse != null)
+            {
+                var result = MessageBox.Show($"Möchten Sie { selectedCourseParticipation.Vorname } { selectedCourseParticipation.Nachname }  wirklich vom Kurs '{ SelectedCourse.DisplayName }' abmelden?", "Abmeldung", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var registration = Workspace.CurrentData.CourseParticipants.Where(x => x.Id == selectedCourseParticipation.AnmeldungsId).FirstOrDefault();
+                    if (registration != null)
+                    {
+                        Workspace.CurrentData.CourseParticipants.Remove(registration);
+                        Workspace.RegisterDataChanged();
+                        SelectedCourse = this.SelectedCourse;
+                    }
+                }
+            }
         }
 
         public bool IsCourseSelected => SelectedCourse != null;

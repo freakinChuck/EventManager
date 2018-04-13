@@ -121,10 +121,10 @@ namespace EventMaster.Participant
                     Anwesenheit = x.Participant.Present.HasValue ? (x.Participant.Present.Value ? "Anwesend" : "Abwesend") : "Offen",
                     Ersatz = x.Participant.IsReplacementCourse ? "Ersatzkurs" : string.Empty,
                     Laufnummer = x.Participant.SequencialNumber,
+                    AnmeldungsId = x.Participant.Id,
                 }).ToList();
             }
         }
-
 
         public string DisplayName => $"{Name} {Firstname}";
 

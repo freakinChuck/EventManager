@@ -48,6 +48,7 @@
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -90,10 +91,14 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <DataGrid Grid.Row="9" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedParticipant.Courses}" ></DataGrid>
+            <DataGrid Grid.Row="9" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedParticipant.Courses}" SelectedItem="{Binding SelectedCourse}" ></DataGrid>
 
-            <Button Grid.Row="10" Padding="5,5,5,5" Click="RegistrationButton_Click">Anmeldung</Button>
+            <StackPanel Grid.Row="10" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <Button Padding="5,5,5,5" Command="{Binding UnregisterCommand}">Ausgewählter Kurs abmelden</Button>
+
+            </StackPanel>
             
+           
         </Grid>
     </DockPanel>
 </Page>
