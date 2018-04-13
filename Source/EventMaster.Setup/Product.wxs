@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define EventMaster_TargetDir=$(var.EventMaster.TargetDir)?>
-	<Product Id="*" Name="EventMaster" Language="1033" Version="1.0.0.0" Manufacturer="Silvio Stappung" UpgradeCode="63b13fda-8108-4194-95a8-dfd3009d5305">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Product Id="*" Name="EventMaster" Language="1033" Version="!(bind.FileVersion.EventMaster.exe.File)" Manufacturer="Silvio Stappung" UpgradeCode="63b13fda-8108-4194-95a8-dfd3009d5305">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <Media Id="1" Cabinet="EventMaster.cab" EmbedCab="yes" CompressionLevel="low" />
