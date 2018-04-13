@@ -39,5 +39,11 @@ build_script:
 
 artifacts:
   # pushing a single file with environment variable in path and "Deployment name" specified
+  - path: Source\EventMaster.Setup\bin\$(configuration)
+    name: EventMaster.Setup
   - path: Source\EventMaster\bin\$(configuration)
     name: EventMaster
+    
+deploy:
+  provider: Environment
+  name: EventMaster Setup Github Releases
