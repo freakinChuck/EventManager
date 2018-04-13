@@ -3,51 +3,86 @@
 	<Product Id="*" Name="EventMaster" Language="1033" Version="1.0.0.0" Manufacturer="Silvio Stappung" UpgradeCode="63b13fda-8108-4194-95a8-dfd3009d5305">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate EmbedCab="yes" />
+    <Media Id="1" Cabinet="EventMaster.cab" EmbedCab="yes" CompressionLevel="low" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of EventMaster is already installed." />
 
 		<Feature Id="ProductFeature" Title="EventMaster.Setup" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
-	</Product>
+
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+
+  </Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="EventMaster.Setup" />
+				<Directory Id="INSTALLFOLDER" Name="EventMaster" />
 			</Directory>
+      
     <Directory Id="ProgramMenuFolder">
       <Directory Id="ApplicationProgramsFolder" Name="EventMaster" />
     </Directory>
 		</Directory>
+    
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    
 	</Fragment>
 
-  <!-- 
-    
-    For STARTMENU Shortcut:
-    http://wixtoolset.org/documentation/manual/v3/howtos/files_and_registry/create_start_menu_shortcut.html
-    
-    File EXTENSIONS: 
-    https://stackoverflow.com/questions/138550/how-to-register-file-types-extensions-with-a-wix-installer
-      -->
-      
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			 <Component Id="ProductComponent"> 
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-         <!--<File Source="$(var.EventMaster.TargetPath)" />-->
-			 </Component>
-			<Component Id="EventMaster.exe" Guid="117a7b01-c46b-421d-a178-82821bba92e8">
-			  <File Id="EventMaster.exe" Name="EventMaster.exe" Source="$(var.EventMaster_TargetDir)EventMaster.exe" />
-			</Component>
-			<Component Id="EventMaster.Storage.dll" Guid="a3d593a9-717e-4990-a794-a4d3e5e38eec">
-			  <File Id="EventMaster.Storage.dll" Name="EventMaster.Storage.dll" Source="$(var.EventMaster_TargetDir)EventMaster.Storage.dll" />
-			</Component>
-			<Component Id="EventMaster.exe.config" Guid="1e6c0f4a-eb66-41eb-aece-f06241e5d42c">
-			  <File Id="EventMaster.exe.config" Name="EventMaster.exe.config" Source="$(var.EventMaster_TargetDir)EventMaster.exe.config" />
-			</Component> 
-		</ComponentGroup>
+			<Component Id="EventMaster.exe.Component" Guid="117a7b01-c46b-421d-a178-82821bba92e8">
+			  <File Id="EventMaster.exe.File" Name="EventMaster.exe" Source="$(var.EventMaster.TargetDir)EventMaster.exe" />
+        <File Id="EventMaster.exe.config" Name="EventMaster.exe.config" Source="$(var.EventMaster.TargetDir)EventMaster.exe.config" />
+        
+        <Shortcut Id="startmenuShortcut" Directory="ProgramMenuFolder" Name="EventMaster" WorkingDirectory="APPLICATIONFOLDER" Advertise="yes" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+
+        <ProgId Id="EventMaster.Document" Description="EventMaster Dokument">
+          <Extension Id="evmn" ContentType="application/evmn">
+            <Verb Id="open" Command="Öffnen" TargetFile="EventMaster.exe.File" Argument="&quot;%1&quot;" />
+          </Extension>
+        </ProgId>
+
+      </Component>
+      <Component Id="EventMaster.Storage.dll" Guid="a3d593a9-717e-4990-a794-a4d3e5e38eec">
+        <File Id="EventMaster.Storage.dll" Name="EventMaster.Storage.dll" Source="$(var.EventMaster.TargetDir)EventMaster.Storage.dll" />
+      </Component>
+
+      <Component Id="EPPlus.dll" Guid="ed66c83a-4673-4a05-b93c-59a3c3276038">
+        <File Id="EPPlus.dll" Name="EPPlus.dll" Source="$(var.EventMaster.TargetDir)EPPlus.dll" />
+      </Component>
+
+      <Component Id="RegistryComponent" Guid="d2c22fd0-e0ab-441f-9ef8-d241ad2a7f46">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities" Name="ApplicationDescription" Value="EventMaster Firmkursplanung" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities" Name="ApplicationIcon" Value="[APPLICATIONFOLDER]EventMaster.exe,0" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities" Name="ApplicationName" Value="EventMaster" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities\DefaultIcon" Value="[APPLICATIONFOLDER]EventMaster.exe,1" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities\FileAssociations" Name=".evmn" Value="EventMaster.Document" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\EventMaster\Capabilities\MIMEAssociations" Name="application/evmn" Value="EventMaster.Document" Type="string" />
+        <!--<RegistryValue Root="HKLM" Key="SOFTWARE\MiniMaster\Capabilities\shell\Open\command" Value="&quot;[APPLICATIONFOLDER]MiniMaster.exe&quot; &quot;%1&quot;" Type="string" />-->
+
+        <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="EventMaster" Value="SOFTWARE\EventMaster\Capabilities" Type="string" />
+
+        <!--<RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.mmst" Name="Content Type" Value="application/mmst" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.mmst\MiniMaster.Document\ShellNew" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.mmst\OpenWithList\MiniMaster.exe" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.mmst\OpenWithProgids" Name="MiniMaster.Document" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MiniMaster.exe\SupportedTypes" Name=".mmst" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MiniMaster.exe\shell\open" Name="FriendlyAppName" Value="MiniMaster" Type="string" />-->
+
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\EventMaster.exe" Value="[!EventMaster.exe]" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\EventMaster.exe" Name="Path" Value="[APPLICATIONFOLDER]" Type="string" />
+
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.evmn\shell\edit.EventMaster.exe" Value="Bearbeiten mit EventMaster" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.evmn\shell\edit.EventMaster.exe\command" Value="&quot;[APPLICATIONFOLDER]EventMaster.exe&quot; &quot;%1&quot;" Type="string" />
+
+      </Component>
+
+    </ComponentGroup>
     
 	</Fragment>
 </Wix>
