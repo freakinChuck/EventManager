@@ -24,7 +24,9 @@ namespace EventMaster.CourseRegistration
         {
             get
             {
-                var list = Workspace.CurrentData.Courses.Where(x => x.PeriodeId == this.PeriodeId).OrderBy(x => x.CourseNumber).ThenBy(x => x.Name).Select(x =>
+                var list = Workspace.CurrentData.Courses.Where(x => x.PeriodeId == this.PeriodeId).Select(x => new { x.Id, x.CourseNumber, x.Name, x.MaxNumberOfParticipants })
+                    .Union(Workspace.CurrentData.Courses.Where(x => x.PeriodeId == this.PeriodeId && !string.IsNullOrWhiteSpace(x.CourseNumber2)).Select(x => new { x.Id, CourseNumber = x.CourseNumber2, x.Name, x.MaxNumberOfParticipants }))
+                    .OrderBy(x => x.CourseNumber).ThenBy(x => x.Name).Select(x =>
                 {
                     var courseAlreadyFull = Workspace.CurrentData.CourseParticipants.Count(c => c.CourseId == x.Id) >= x.MaxNumberOfParticipants;
                     return new IdNameHelper { Id = x.Id, Name = $"{ (courseAlreadyFull ? "Ausgebucht: " : string.Empty) }{x.CourseNumber} - {x.Name}" };

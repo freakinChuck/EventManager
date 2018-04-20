@@ -115,7 +115,7 @@ namespace EventMaster.Participant
                 {
                     Periode = Workspace.CurrentData.CoursePeriods.Where(p => p.Id == x.Course.PeriodeId).FirstOrDefault()?.PeriodName ?? "unbekannte Periode",
                     Titel = x.Course.Name,
-                    Kursnummer = x.Course.CourseNumber,
+                    Kursnummer = x.Course.CourseNumber + (!string.IsNullOrEmpty(x.Course.CourseNumber2) ? "/"+x.Course.CourseNumber2 : string.Empty),
                     Datum = $"{x.Course.Date.ToShortDateString()} - {x.Course.Time}",
                     Kursleiter = x.CourseLeader != null ? ($"{ x.CourseLeader.Name } { x.CourseLeader.Firstname }") : "unbekannt",
                     Anwesenheit = x.Participant.Present.HasValue ? (x.Participant.Present.Value ? "Anwesend" : "Abwesend") : "Offen",

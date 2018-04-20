@@ -21,6 +21,7 @@ namespace EventMaster.Storage.Model
         public string Name { get; set; }
         public string MeetPoint { get; set; }
         public string CourseNumber { get; set; }
+        public string CourseNumber2 { get; set; }
         public int MaxNumberOfParticipants { get; set; }
 
         public string AdditionalInformation { get; set; }

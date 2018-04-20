@@ -51,11 +51,21 @@ namespace EventMaster.Course
             set
             {
                 storageCourse.CourseNumber = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Number"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CourseNumber"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
             }
         }
-        public string DisplayName => $"{CourseNumber} - {Name}";
+        public string CourseNumber2
+        {
+            get { return storageCourse.CourseNumber2; }
+            set
+            {
+                storageCourse.CourseNumber2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CourseNumber2"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
+            }
+        }
+        public string DisplayName => string.Format("{0} - {1}", CourseNumber + (string.IsNullOrWhiteSpace(CourseNumber2) ? "" : "/" + CourseNumber2), Name);
 
         public string AdditionalInformation
         {
