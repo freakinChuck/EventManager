@@ -99,6 +99,7 @@
             <StackPanel Grid.Row="17" Grid.ColumnSpan="4" Orientation="Horizontal">
                 <Button Padding="5,5,5,5" Command="{Binding UnregisterCommand}">Ausgewählter Teilnehmer abmelden</Button>
                 <Button Padding="5,5,5,5" Command="{Binding SendEmailCommand}">Email an Alle</Button>
+                <Button Padding="5,5,5,5" Command="{Binding CourseListCommand}">Kursliste</Button>
 
             </StackPanel>
 

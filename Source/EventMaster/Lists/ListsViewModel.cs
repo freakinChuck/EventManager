@@ -8,6 +8,8 @@ using System.Linq;
 using EventMaster.CoursePeriod;
 using System.ComponentModel;
 using System.Windows;
+using System.Text;
+using EventMaster.Storage.Model;
 
 namespace EventMaster.Lists
 {
@@ -209,8 +211,7 @@ namespace EventMaster.Lists
                 }
             }
         }
-
-
+        
         public BindingCommand CheckListCommand
         {
             get { return new BindingCommand(x => CheckList()); }
@@ -308,6 +309,83 @@ namespace EventMaster.Lists
                 }
             }
 
+        }
+
+
+        public BindingCommand ImportCommand
+        {
+            get { return new BindingCommand(x => Import()); }
+        }
+
+        private void Import()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = string.Format("Excel (*{0})|*{0}", ".xlsx");
+            var result = dialog.ShowDialog();
+            if (result ?? false)
+            {
+                using (ExcelPackage package = new ExcelPackage(new FileInfo(dialog.FileName)))
+                {
+                    var importNameColumn = 2;
+                    var importFirstNameColumn = 3;
+                    var importAdresseColumn = 5;
+                    var importTownColumn = 6;
+                    var importPhoneColumn = 8;
+                    var importBemerkungColumn = 10;
+
+                    var worksheet = package.Workbook.Worksheets.First();
+                    if (!(
+                        worksheet.GetValue(1,importNameColumn)?.ToString() == "Name" && 
+                        worksheet.GetValue(1, importFirstNameColumn)?.ToString() == "Vorname" &&
+                        worksheet.GetValue(1, importAdresseColumn)?.ToString() == "Adresse" &&
+                        worksheet.GetValue(1, importTownColumn)?.ToString() == "PLZ + Ort" &&
+                        worksheet.GetValue(1, importPhoneColumn)?.ToString() == "Tel.Nr." &&
+                        worksheet.GetValue(1, importBemerkungColumn)?.ToString() == "Bemerkung"
+                        ))
+                    {
+                        StringBuilder builder = new StringBuilder();
+                        builder.AppendLine("Das Format der Importdatei scheint nicht zu stimmen. Bitte überprüfen Sie die Anordnung der Spalten.");
+                        builder.AppendLine();
+                        builder.AppendLine($"Position {importNameColumn}: Name");
+                        builder.AppendLine($"Position {importFirstNameColumn}: Vorname");
+                        builder.AppendLine($"Position {importAdresseColumn}: Adresse");
+                        builder.AppendLine($"Position {importTownColumn}: PLZ + Ort");
+                        builder.AppendLine($"Position {importPhoneColumn}: Tel.Nr.");
+                        builder.AppendLine($"Position {importBemerkungColumn}: Bemerkung");
+                        builder.AppendLine();
+                        builder.AppendLine("Die Zellen in er ersten Zeile müssen die entsprechenden Titel tragen!");
+
+
+                        MessageBox.Show(builder.ToString(), "Format der Importdatei", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    int rowIndex = 2;
+
+                    while (!string.IsNullOrEmpty(worksheet.GetValue(rowIndex, importNameColumn)?.ToString()))
+                    {
+                        var name = worksheet.GetValue(rowIndex, importNameColumn)?.ToString();
+                        var firstName = worksheet.GetValue(rowIndex, importFirstNameColumn)?.ToString();
+                        var adresse = worksheet.GetValue(rowIndex, importAdresseColumn)?.ToString();
+                        var town = worksheet.GetValue(rowIndex, importTownColumn)?.ToString();
+                        var phone = worksheet.GetValue(rowIndex, importPhoneColumn)?.ToString();
+                        var additionalInfo = worksheet.GetValue(rowIndex, importBemerkungColumn)?.ToString();
+
+                        var participant = ParticipantModel.CreateNewParticipant();
+                        participant.AdditionalInformation = additionalInfo;
+                        participant.Address = adresse;
+                        participant.Firstname = firstName;
+                        participant.Name = name;
+                        participant.Telefon = phone;
+                        participant.Town = town;
+                        participant.PeriodIds = new[] { SelectedCoursePeriod.Id }.ToList();
+
+                        rowIndex++;
+                    }
+
+                }
+
+            }
         }
 
         private int selectedIndex;

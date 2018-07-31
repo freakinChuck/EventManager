@@ -1,9 +1,12 @@
 ﻿using EventMaster._Helper;
 using EventMaster.Storage;
 using EventMaster.Storage.Model;
+using Microsoft.Win32;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -172,7 +175,52 @@ namespace EventMaster.Course
             
         }
 
-        
+        public BindingCommand CourseListCommand
+        {
+            get { return new BindingCommand(x => CourseList()); }
+        }
+        private void CourseList()
+        {
+            if (SelectedCourse.Participants.Any())
+            {
+                using (ExcelPackage package = new ExcelPackage())
+                {
+                    var worksheet = package.Workbook.Worksheets.Add($"Kursliste {SelectedCourse.DisplayName}");
+
+                    var columnIndex = 1;
+                    worksheet.SetValue(1, columnIndex++, "Nachname");
+                    worksheet.SetValue(1, columnIndex++, "Vorname");
+                    worksheet.SetValue(1, columnIndex++, "Adresse");
+                    worksheet.SetValue(1, columnIndex++, "Ort");
+                    worksheet.SetValue(1, columnIndex++, "Telefon");
+
+                    var rowIndex = 2;
+                    foreach (var item in SelectedCourse.Participants)
+                    {
+                        columnIndex = 1;
+                        var registration = Workspace.CurrentData.CourseParticipants.Find(x => x.Id == item.AnmeldungsId);
+                        var participant = Workspace.CurrentData.Participants.Find(x => x.Id == registration.ParticipantId);
+                        worksheet.SetValue(1, columnIndex++, participant.Name);
+                        worksheet.SetValue(1, columnIndex++, participant.Firstname);
+                        worksheet.SetValue(1, columnIndex++, participant.Address);
+                        worksheet.SetValue(1, columnIndex++, participant.Town);
+                        worksheet.SetValue(1, columnIndex++, participant.Telefon);
+                    }
+
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    dialog.AddExtension = true;
+                    dialog.DefaultExt = "*.xlsx";
+                    dialog.Filter = string.Format("Excel (*{0})|*{0}", ".xlsx");
+                    var result = dialog.ShowDialog();
+                    if (result ?? false)
+                    {
+                        package.SaveAs(new FileInfo(dialog.FileName));
+                    }
+
+                }
+            }
+            
+        }
 
         public bool IsCourseSelected => SelectedCourse != null;
 

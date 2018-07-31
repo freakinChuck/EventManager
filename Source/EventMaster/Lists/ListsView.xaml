@@ -62,6 +62,12 @@
             </Button>
 
 
+            <Label Grid.Column="0" Grid.Row="2">Excel-Import</Label>
+            <Button Grid.Column="1" Grid.Row="2" Width="50px"  Command="{Binding ImportCommand}">
+                Import
+            </Button>
+
+
         </Grid>
     </DockPanel>
 </Page>
