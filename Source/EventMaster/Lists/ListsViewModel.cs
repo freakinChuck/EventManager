@@ -218,9 +218,97 @@ namespace EventMaster.Lists
 
         private void CheckList()
         {
-            throw new NotImplementedException();
-        }
+            var allCourses = Workspace.CurrentData.Courses.Where(x => x.PeriodeId == SelectedCoursePeriod.Id).ToList();
+            var allCourseIds = allCourses.Select(x => x.Id).ToList();
+            var allParticipants = Workspace.CurrentData.CourseParticipants.Where(x => allCourseIds.Contains(x.CourseId)).GroupBy(x => x.ParticipantId).ToList();
 
+            var requiredCourseTypes = SelectedCoursePeriod.storageCoursePeriod.CourseTypes;
+
+            var excelData = allParticipants.Select(item =>
+            {
+                var participant = Workspace.CurrentData.Participants.Find(x => x.Id == item.Key);
+
+                var participations = Workspace.CurrentData.CourseParticipants.Where(x => x.ParticipantId == participant.Id && (x.Present ?? false))
+                        .Select(x => Workspace.CurrentData.Courses.Find(c => c.Id == x.CourseId))
+                        .Where(x => x.PeriodeId == SelectedCoursePeriod.Id)
+                        .ToList();
+
+
+                foreach (var participation in participations)
+                {
+                    if (requiredCourseTypes.Contains(participation.CourseTypeId))
+                    {
+                        requiredCourseTypes.Remove(participation.CourseTypeId);
+                    }
+                }
+
+                var remainingCourseTypes = requiredCourseTypes.Select(id => Workspace.CurrentData.CourseTypes.Find(t => t.Id == id)).ToList();
+
+                return new
+                {
+                    TeilnehmerVorname = participant.Firstname,
+                    TeilnehmerNachname = participant.Name,
+                    TeilnehmerAdresse = participant.Address,
+                    TeilnehmerOrt = participant.Town,
+                    TeilnehmerEmail = participant.Email,
+                    TeilnehmerTelefon = participant.Telefon,
+                    TeilnehmerZusatzInfos = participant.AdditionalInformation,
+
+                    GenuegendKurseBesucht = !remainingCourseTypes.Any() ? "Ja" : "Nein"
+
+                };
+            });
+
+            if (!excelData.Any())
+            {
+                MessageBox.Show($"Für die Periode {SelectedCoursePeriod.PeriodName} wurden keine Daten gefunden.", "keine Anmeldungen", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Jahresendliste");
+
+                var columnIndex = 1;
+
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerVorname");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerNachname");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerAdresse");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerOrt");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerEmail");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerTelefon");
+                worksheet.SetValue(1, columnIndex++, "TeilnehmerZusatzInfos");
+                worksheet.SetValue(1, columnIndex++, "GenuegendKurseBesucht");
+
+                int rowIndex = 2;
+                foreach (var item in excelData)
+                {
+                    columnIndex = 1;
+
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerVorname);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerNachname);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerAdresse);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerOrt);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerEmail);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerTelefon);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.TeilnehmerZusatzInfos);
+                    worksheet.SetValue(rowIndex, columnIndex++, item.GenuegendKurseBesucht);
+
+                    rowIndex++;
+                }
+
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "*.xlsx";
+                dialog.Filter = string.Format("Excel (*{0})|*{0}", ".xlsx");
+                var result = dialog.ShowDialog();
+                if (result ?? false)
+                {
+                    package.SaveAs(new FileInfo(dialog.FileName));
+                }
+            }
+
+        }
 
         private int selectedIndex;
 
