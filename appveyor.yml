@@ -2,7 +2,7 @@
 version: 0.0.{build}
 
 # build with VS17
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 # build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform: Any CPU
