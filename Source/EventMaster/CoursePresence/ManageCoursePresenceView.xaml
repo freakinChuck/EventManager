@@ -1,0 +1,67 @@
+﻿<Page x:Class="EventMaster.CoursePresence.ManageCoursePresenceView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventMaster.CoursePresence"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="600"
+      Title="ManageCoursePresenceView">
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Left" Width="211">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.ColumnSpan="2" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding AllCourses}" SelectionChanged="ListView_SelectionChanged" SelectionMode="Single" Grid.Row="0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+
+        <Grid IsEnabled="{Binding IsCourseSelected}">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ItemsControl ItemsSource="{Binding AllPresences}" Grid.Row="0" Grid.ColumnSpan="4">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding Name}" Width="150" />
+
+                            <Button Width="100px" Command="{Binding SetPresentCommand}" IsEnabled="{Binding IsNotPresent}">Anwesend</Button>
+                            <TextBlock Text="" Width="20" />
+                            <Button Width="100px" Command="{Binding SetOpenCommand}" IsEnabled="{Binding IsNotOpen}">Offen</Button>
+                            <TextBlock Text="" Width="20" />
+                            <Button Width="100px" Command="{Binding SetMissingCommand}" IsEnabled="{Binding IsNotMissing}">Abwesend</Button>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Grid>
+    </DockPanel>
+</Page>

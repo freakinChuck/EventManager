@@ -126,7 +126,7 @@ namespace EventMaster.CourseRegistration
         {
             if (!string.IsNullOrWhiteSpace(courseId) && SelectedParticipant != null)
             {
-                if (!Workspace.CurrentData.CourseParticipants.Any(x => x.CourseId == courseId && x.ParticipantId == SelectedParticipant.Id))
+                if (!Workspace.CurrentData.CourseParticipants.Any(x => x.CourseId == courseId && x.ParticipantId == SelectedParticipant.Id && !x.IsReplacementCourse && (x.Present ?? true)))
                 {
                     var newParticipant = CourseParticipantModel.CreateNewCourseParticipant();
                     newParticipant.CourseId = courseId;

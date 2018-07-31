@@ -14,6 +14,8 @@
     <BitmapImage x:Key="PeriodsImage" UriSource="Icons/285673 - clock.png" />
     <BitmapImage x:Key="RegistrationImage" UriSource="Icons/299064 - enveloppe letter.png" />
     <BitmapImage x:Key="PresenceImage" UriSource="Icons/285659 - map marker.png" />
+
+    <BitmapImage x:Key="ExcelImage" UriSource="Icons/file-excel.png" />
     
     
 </ResourceDictionary>

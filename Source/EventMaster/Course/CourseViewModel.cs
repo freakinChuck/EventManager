@@ -77,7 +77,7 @@ namespace EventMaster.Course
             }
         }
 
-        public DateTime Date
+        public string Date
         {
             get { return storageCourse.Date; }
             set
@@ -96,6 +96,77 @@ namespace EventMaster.Course
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Time"));
             }
         }
+
+        public string MeetPoint
+        {
+            get { return storageCourse.MeetPoint; }
+            set
+            {
+                storageCourse.MeetPoint = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MeetPoint"));
+            }
+        }
+
+        public string Date2
+        {
+            get { return storageCourse.Date2; }
+            set
+            {
+                storageCourse.Date2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Date2"));
+            }
+        }
+
+        public string Time2
+        {
+            get { return storageCourse.Time2; }
+            set
+            {
+                storageCourse.Time2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Time2"));
+            }
+        }
+
+        public string MeetPoint2
+        {
+            get { return storageCourse.MeetPoint2; }
+            set
+            {
+                storageCourse.MeetPoint2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MeetPoint2"));
+            }
+        }
+
+        public string Date3
+        {
+            get { return storageCourse.Date3; }
+            set
+            {
+                storageCourse.Date3 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Date3"));
+            }
+        }
+
+        public string Time3
+        {
+            get { return storageCourse.Time3; }
+            set
+            {
+                storageCourse.Time3 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Time3"));
+            }
+        }
+
+        public string MeetPoint3
+        {
+            get { return storageCourse.MeetPoint3; }
+            set
+            {
+                storageCourse.MeetPoint3 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MeetPoint3"));
+            }
+        }
+
 
         public int MaxNumberOfParticipants
         {
@@ -125,19 +196,7 @@ namespace EventMaster.Course
                 storageCourse.CourseTypeId = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CourseTypeId"));
             }
-        }
-
-        public string MeetPoint
-        {
-            get { return storageCourse.MeetPoint; }
-            set
-            {
-                storageCourse.MeetPoint = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MeetPoint"));
-            }
-        }
-
-        
+        }        
 
         public List<CourseParticipantListViewModel> Participants
         {

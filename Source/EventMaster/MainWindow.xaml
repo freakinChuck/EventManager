@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EventMaster"
         mc:Ignorable="d"
-        Title="EventMaster" Height="609.5" Width="1036.5"
-        Closing="Window_Closing" WindowStartupLocation="CenterOwner">
+        Title="EventMaster" Height="800" Width="1200"
+        Closing="Window_Closing" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
@@ -26,10 +26,10 @@
             <RibbonTab Header="Kursverwaltung" IsEnabled="{Binding IsWorkspaceActive}">
                 <RibbonGroup Header="Teilnehmer">
                     <RibbonButton x:Name="OpenRegistrationRibbonButton" Label="Anmeldungen" LargeImageSource="{StaticResource RegistrationImage}" Click="OpenRegistrationRibbonButton_Click" />
-                    <RibbonButton x:Name="OpenPresenceRibbonButton" Label="Anwesenheitsprüfung" LargeImageSource="{StaticResource PresenceImage}" />
+                    <RibbonButton x:Name="OpenPresenceRibbonButton" Label="Anwesenheitsprüfung" LargeImageSource="{StaticResource PresenceImage}" Click="OpenPresenceRibbonButton_Click" />
                 </RibbonGroup>
                 <RibbonGroup Header="Auswertung">
-                    <RibbonButton x:Name="ListsRibbonButton" Label="Listen" />
+                    <RibbonButton x:Name="ListsRibbonButton" Label="Listen" LargeImageSource="{StaticResource ExcelImage}" Click="ListsRibbonButton_Click" />
                 </RibbonGroup>
                 <RibbonGroup Header="Verwaltung">
                     <RibbonButton Label="Kurse" LargeImageSource="{StaticResource CourseImage}" Click="OpenCoursesRibbonButton_Click" />

@@ -5,9 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace EventMaster.Course
 {
@@ -96,6 +99,80 @@ namespace EventMaster.Course
                 }
             }
         }
+
+        public BindingCommand SendEmailCommand
+        {
+            get { return new BindingCommand(x => SendEmail()); }
+        }
+        private void SendEmail()
+        {
+            try
+            {
+                var course = this.SelectedCourse;
+                var courseLeader = Workspace.CurrentData.Employees.Find(e => e.Id == course.EmployeeCourseLeaderId);
+
+                var courseLeaderMail = courseLeader.Email;
+                var participantIds = Workspace.CurrentData.CourseParticipants.Where(x => x.CourseId == course.Id).Select(x => new { Id = x.ParticipantId, Replace = x.IsReplacementCourse }).ToList();
+                var participants = participantIds.Select(x => new { Participant = Workspace.CurrentData.Participants.Where(p => p.Id == x.Id).FirstOrDefault(), Replacement = x.Replace }).ToList();
+
+                Outlook.Application oApp = new Outlook.Application();
+                Outlook._MailItem oMailItem = (Outlook._MailItem)oApp.CreateItem(Outlook.OlItemType.olMailItem);
+                oMailItem.To = courseLeaderMail;
+                oMailItem.BCC = string.Join(";", participants.OrderBy(x => x.Replacement).Select(x => x.Participant.Email));
+
+                StringBuilder messageBuilder = new StringBuilder();
+                messageBuilder.AppendLine("Liebe Schülerin, lieber Schüler");
+                messageBuilder.AppendLine();
+                messageBuilder.AppendLine("Es freut uns, dass Du Dich für das Angebot");
+                messageBuilder.AppendLine();
+                if (string.IsNullOrEmpty(course.CourseNumber2))
+                {
+                    messageBuilder.Append($"{course.CourseNumber}");
+                }
+                else
+                {
+                    messageBuilder.Append($"{course.CourseNumber}/{course.CourseNumber2}");
+                }
+                messageBuilder.AppendLine($" {course.Name}");
+                messageBuilder.AppendLine();
+                messageBuilder.AppendLine("angemeldet hast. Zur Erinnerung teilen wir Dir nochmals mit, wann und wo wir uns treffen.");
+
+                messageBuilder.AppendLine();
+
+                messageBuilder.AppendLine($"Wann:\t{ course.Date }");
+                messageBuilder.AppendLine($"\t{ course.Time }");
+                messageBuilder.AppendLine();
+                messageBuilder.AppendLine($"Wo:\t{ course.MeetPoint }");
+                messageBuilder.AppendLine();
+
+                messageBuilder.AppendLine($"Wann:\t{ course.Date2 }");
+                messageBuilder.AppendLine($"\t{ course.Time2 }");
+                messageBuilder.AppendLine();
+                messageBuilder.AppendLine($"Wo:\t{ course.MeetPoint2 }");
+                messageBuilder.AppendLine();
+
+                messageBuilder.AppendLine($"Wann:\t{ course.Date3 }");
+                messageBuilder.AppendLine($"\t{ course.Time3 }");
+                messageBuilder.AppendLine();
+                messageBuilder.AppendLine($"Wo:\t{ course.MeetPoint3 }");
+                messageBuilder.AppendLine();
+
+                messageBuilder.AppendLine($"Leitung:\t{ courseLeader.Firstname } { courseLeader.Name }, { courseLeader.Title }, Tel. { courseLeader.Phone }");
+                messageBuilder.AppendLine();
+
+                oMailItem.Body = messageBuilder.ToString();
+
+                oMailItem.Display(false);
+            }
+            catch (Exception exc)
+            {
+                exc.ToString();
+                MessageBox.Show("Die Integration von Outlook ist fehlgeschlagen.", "Outlook", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        
 
         public bool IsCourseSelected => SelectedCourse != null;
 

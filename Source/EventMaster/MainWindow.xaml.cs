@@ -129,5 +129,16 @@ namespace EventMaster
             //ContentFrame.Content = registrationWindow.Content;
             registrationWindow.Show();
         }
+
+        private void OpenPresenceRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new CoursePresence.ManageCoursePresenceView();
+
+        }
+
+        private void ListsRibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Content = new Lists.ManageListsView();
+        }
     }
 }

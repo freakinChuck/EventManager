@@ -46,6 +46,12 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -64,22 +70,35 @@
             <Label Grid.Column="0" Grid.Row="2">Titel</Label>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Name, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="3">Datum</Label>
-            <DatePicker Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.Date, Mode=TwoWay, ConverterCulture=de-CH }" Grid.ColumnSpan="2"></DatePicker>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.Date, Mode=TwoWay, ConverterCulture=de-CH }" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="4">Zeit</Label>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedCourse.Time, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Column="0" Grid.Row="5">Treffpunkt</Label>
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=SelectedCourse.MeetPoint, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
-            <Label Grid.Column="0" Grid.Row="6">Leitung</Label>
-            <ComboBox Grid.Column="1" Grid.Row="6" SelectedValue="{Binding Path=SelectedCourse.EmployeeCourseLeaderId, Mode=TwoWay}" ItemsSource="{Binding AllEmployees}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
-            <Label Grid.Column="0" Grid.Row="7">Max. Teilnehmer</Label>
-            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedCourse.MaxNumberOfParticipants, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
-            <Label Grid.Column="0" Grid.Row="8">Kurstyp</Label>
-            <ComboBox Grid.Column="1" Grid.Row="8" SelectedValue="{Binding Path=SelectedCourse.CourseTypeId, Mode=TwoWay}" ItemsSource="{Binding AllCourseTypes}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+            <Label Grid.Column="0" Grid.Row="6">Datum 2</Label>
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=SelectedCourse.Date2, Mode=TwoWay, ConverterCulture=de-CH }" Grid.ColumnSpan="2" ></TextBox>
+            <Label Grid.Column="0" Grid.Row="7">Zeit 2</Label>
+            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedCourse.Time2, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="8">Treffpunkt 2</Label>
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=SelectedCourse.MeetPoint2, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="9">Datum 3</Label>
+            <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=SelectedCourse.Date3, Mode=TwoWay, ConverterCulture=de-CH }" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="10">Zeit 3</Label>
+            <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=SelectedCourse.Time3, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="11">Treffpunkt 3</Label>
+            <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Path=SelectedCourse.MeetPoint3, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="12">Leitung</Label>
+            <ComboBox Grid.Column="1" Grid.Row="12" SelectedValue="{Binding Path=SelectedCourse.EmployeeCourseLeaderId, Mode=TwoWay}" ItemsSource="{Binding AllEmployees}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
+            <Label Grid.Column="0" Grid.Row="13">Max. Teilnehmer</Label>
+            <TextBox Grid.Column="1" Grid.Row="13" Text="{Binding Path=SelectedCourse.MaxNumberOfParticipants, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+            <Label Grid.Column="0" Grid.Row="14">Kurstyp</Label>
+            <ComboBox Grid.Column="1" Grid.Row="14" SelectedValue="{Binding Path=SelectedCourse.CourseTypeId, Mode=TwoWay}" ItemsSource="{Binding AllCourseTypes}" DisplayMemberPath="Name" SelectedValuePath="Id" Grid.ColumnSpan="2"></ComboBox>
 
-            <DataGrid Grid.Row="10" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedCourse.Participants}" SelectedItem="{Binding SelectedCourseParticipation}" ></DataGrid>
+            <DataGrid Grid.Row="16" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedCourse.Participants}" SelectedItem="{Binding SelectedCourseParticipation}" ></DataGrid>
 
-            <StackPanel Grid.Row="11" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <StackPanel Grid.Row="17" Grid.ColumnSpan="4" Orientation="Horizontal">
                 <Button Padding="5,5,5,5" Command="{Binding UnregisterCommand}">Ausgewählter Teilnehmer abmelden</Button>
+                <Button Padding="5,5,5,5" Command="{Binding SendEmailCommand}">Email an Alle</Button>
 
             </StackPanel>
 

@@ -88,7 +88,7 @@
 
                 <Button Grid.Row="6" Grid.Column="2"  Padding="5,5,5,5" Command="{Binding RegiterSelectionCommand}">Anmelden</Button>
 
-                <DataGrid Grid.Row="8" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedParticipant.Courses}"></DataGrid>
+                <DataGrid Grid.Row="8" Grid.ColumnSpan="4" ItemsSource="{Binding Path=SelectedParticipant.CoursesWithoutAnsences}"></DataGrid>
 
             </Grid>
         </Grid>

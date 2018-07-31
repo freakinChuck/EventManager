@@ -16,10 +16,16 @@ namespace EventMaster.Storage.Model
         public string PeriodeId { get; set; }
         public string EmployeeCourseLeaderId { get; set; }
         public string CourseTypeId { get; set; }
-        public DateTime Date { get; set; }
-        public string Time { get; set; }
         public string Name { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
         public string MeetPoint { get; set; }
+        public string Date2 { get; set; }
+        public string Time2 { get; set; }
+        public string MeetPoint2 { get; set; }
+        public string Date3 { get; set; }
+        public string Time3 { get; set; }
+        public string MeetPoint3 { get; set; }
         public string CourseNumber { get; set; }
         public string CourseNumber2 { get; set; }
         public int MaxNumberOfParticipants { get; set; }
