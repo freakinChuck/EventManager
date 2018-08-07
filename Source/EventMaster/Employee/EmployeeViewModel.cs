@@ -49,7 +49,7 @@ namespace EventMaster.Employee
             get { return storageEmployee.Title; }
             set
             {
-                storageEmployee.Firstname = value;
+                storageEmployee.Title = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Title"));
             }
         }
