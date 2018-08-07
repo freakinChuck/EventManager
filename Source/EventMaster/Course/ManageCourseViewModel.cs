@@ -193,6 +193,7 @@ namespace EventMaster.Course
                     worksheet.SetValue(1, columnIndex++, "Adresse");
                     worksheet.SetValue(1, columnIndex++, "Ort");
                     worksheet.SetValue(1, columnIndex++, "Telefon");
+                    worksheet.SetValue(1, columnIndex++, "Email");
 
                     var rowIndex = 2;
                     foreach (var item in SelectedCourse.Participants)
@@ -200,11 +201,13 @@ namespace EventMaster.Course
                         columnIndex = 1;
                         var registration = Workspace.CurrentData.CourseParticipants.Find(x => x.Id == item.AnmeldungsId);
                         var participant = Workspace.CurrentData.Participants.Find(x => x.Id == registration.ParticipantId);
-                        worksheet.SetValue(1, columnIndex++, participant.Name);
-                        worksheet.SetValue(1, columnIndex++, participant.Firstname);
-                        worksheet.SetValue(1, columnIndex++, participant.Address);
-                        worksheet.SetValue(1, columnIndex++, participant.Town);
-                        worksheet.SetValue(1, columnIndex++, participant.Telefon);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Name);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Firstname);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Address);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Town);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Telefon);
+                        worksheet.SetValue(rowIndex, columnIndex++, participant.Email);
+                        rowIndex++;
                     }
 
                     SaveFileDialog dialog = new SaveFileDialog();
