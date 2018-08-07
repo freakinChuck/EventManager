@@ -1,4 +1,5 @@
-﻿using EventMaster.Storage;
+﻿using EventMaster._Helper;
+using EventMaster.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,18 @@ namespace EventMaster
         internal void PreDataSaveInvoke()
         {
             PreDataSave?.Invoke(this, new EventArgs());
+        }
+
+        public BindingCommand SaveCommand
+        {
+            get { return new BindingCommand(x => Save()); }
+        }
+
+        private void Save()
+        {
+            this.PreDataSaveInvoke();
+            Workspace.SaveCurrentWorkspace();
+            this.NotifyIsWorkspaceActiveChanged();
         }
     }
 }
