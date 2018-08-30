@@ -86,9 +86,9 @@ namespace EventMaster.Lists
                                 KursLeiterVorname = courseLeader.Firstname,
                                 KursLeiterNachname = courseLeader.Name,
 
-                                KursLeiterTitel = courseLeader.Title,
-                                KursLeiterTelefon = courseLeader.Phone,
-                                KursLeiterEmail = courseLeader.Email,
+                                KursLeiterTitel = courseLeader?.Title,
+                                KursLeiterTelefon = courseLeader?.Phone,
+                                KursLeiterEmail = courseLeader?.Email,
 
                             };
 
