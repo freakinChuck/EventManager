@@ -52,7 +52,18 @@ namespace EventMaster.CoursePresence
             get
             {
                 var allParticipants = Workspace.CurrentData.CourseParticipants.Where(x => x.CourseId == selectedCourse?.Id).ToList();
-                return allParticipants.Select(x => new CoursePresenceViewModel(x)).OrderBy(x => x.Name).ToList();
+                return allParticipants.Select(x => new CoursePresenceViewModel(x)).Where(x =>
+                {
+                    try
+                    {
+                        x.Name.ToString();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }).OrderBy(x => x.Name).ToList();
             }
         }
 

@@ -41,6 +41,11 @@ namespace EventMaster.Lists
                 {
                     var participant = Workspace.CurrentData.Participants.Find(x => x.Id == item.Key);
 
+                    if (participant == null)
+                    {
+                        return null;
+                    }
+
                     return new
                     {
                         TeilnehmerVorname = participant.Firstname,
@@ -59,32 +64,32 @@ namespace EventMaster.Lists
 
                             return new
                             {
-                                Ersatz = x.IsReplacementCourse ? "Ja" : "Nein",
+                                Ersatz = (x?.IsReplacementCourse ?? false) ? "Ja" : "Nein",
 
-                                KursNr1 = course.CourseNumber,
-                                KursNr2 = course.CourseNumber2,
-                                KursName = course.Name,
+                                KursNr1 = course?.CourseNumber,
+                                KursNr2 = course?.CourseNumber2,
+                                KursName = course?.Name,
 
-                                Datum1 = course.Date,
-                                Datum2 = course.Date2,
-                                Datum3 = course.Date3,
+                                Datum1 = course?.Date,
+                                Datum2 = course?.Date2,
+                                Datum3 = course?.Date3,
 
-                                Zeit1 = course.Time,
-                                Zeit2 = course.Time2,
-                                Zeit3 = course.Time3,
+                                Zeit1 = course?.Time,
+                                Zeit2 = course?.Time2,
+                                Zeit3 = course?.Time3,
 
-                                Treffpunkt1 = course.MeetPoint,
-                                Treffpunkt2 = course.MeetPoint2,
-                                Treffpunkt3 = course.MeetPoint3,
+                                Treffpunkt1 = course?.MeetPoint,
+                                Treffpunkt2 = course?.MeetPoint2,
+                                Treffpunkt3 = course?.MeetPoint3,
                                 
-                                MaximaleAnzahlTeilnehmer = course.MaxNumberOfParticipants,
+                                MaximaleAnzahlTeilnehmer = course?.MaxNumberOfParticipants,
 
-                                ZusatzInfosKurs = course.AdditionalInformation,
+                                ZusatzInfosKurs = course?.AdditionalInformation,
 
-                                Kurstyp = courseType.TypeName,
+                                Kurstyp = courseType?.TypeName,
 
-                                KursLeiterVorname = courseLeader.Firstname,
-                                KursLeiterNachname = courseLeader.Name,
+                                KursLeiterVorname = courseLeader?.Firstname,
+                                KursLeiterNachname = courseLeader?.Name,
 
                                 KursLeiterTitel = courseLeader?.Title,
                                 KursLeiterTelefon = courseLeader?.Phone,
@@ -96,7 +101,7 @@ namespace EventMaster.Lists
 
                     };
                 })
-                .ToList();
+                .Where(x => x != null).ToList();
 
                 if (!excelData.Any())
                 {

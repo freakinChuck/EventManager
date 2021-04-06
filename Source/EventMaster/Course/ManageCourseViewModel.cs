@@ -116,7 +116,7 @@ namespace EventMaster.Course
 
                 var courseLeaderMail = courseLeader.Email;
                 var participantIds = Workspace.CurrentData.CourseParticipants.Where(x => x.CourseId == course.Id).Select(x => new { Id = x.ParticipantId, Replace = x.IsReplacementCourse }).ToList();
-                var participants = participantIds.Select(x => new { Participant = Workspace.CurrentData.Participants.Where(p => p.Id == x.Id).FirstOrDefault(), Replacement = x.Replace }).ToList();
+                var participants = participantIds.Select(x => new { Participant = Workspace.CurrentData.Participants.Where(p => p.Id == x.Id).FirstOrDefault(), Replacement = x.Replace }).Where(x => x.Participant != null).ToList();
 
                 Outlook.Application oApp = new Outlook.Application();
                 Outlook._MailItem oMailItem = (Outlook._MailItem)oApp.CreateItem(Outlook.OlItemType.olMailItem);
