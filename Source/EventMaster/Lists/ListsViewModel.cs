@@ -230,10 +230,9 @@ namespace EventMaster.Lists
 
             var requiredCourseTypes = SelectedCoursePeriod.storageCoursePeriod.CourseTypes;
 
-            var excelData = allParticipants.Select(item =>
+            var excelData = allParticipants.Select(item => Workspace.CurrentData.Participants.Find(x => x.Id == item.Key))
+                .Where(x => x != null).Select(participant =>
             {
-                var participant = Workspace.CurrentData.Participants.Find(x => x.Id == item.Key);
-
                 var participations = Workspace.CurrentData.CourseParticipants.Where(x => x.ParticipantId == participant.Id && (x.Present ?? false))
                         .Select(x => Workspace.CurrentData.Courses.Find(c => c.Id == x.CourseId))
                         .Where(x => x.PeriodeId == SelectedCoursePeriod.Id)
